@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Moraspirit\EntityBundle\Entity\Event" table="event">
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="name" type="string" column="name" length="50" nullable="false"/>
+    <field name="teamleader" type="integer" column="teamleader" nullable="false"/>
+    <field name="project" type="integer" column="project" nullable="false"/>
+    <field name="weight" type="integer" column="weight" nullable="false"/>
+    <field name="description" type="text" column="description" nullable="false"/>
+    <field name="goals" type="text" column="goals" nullable="false"/>
+    <field name="members" type="array" column="members" nullable="false"/>
+    <field name="starttimestamp" type="text" column="starttimestamp" nullable="false"/>
+    <field name="endtimestamp" type="text" column="endtimestamp" nullable="false"/>
+    <field name="duetimestamp" type="text" column="duetimestamp" nullable="false"/>
+  </entity>
+</doctrine-mapping>

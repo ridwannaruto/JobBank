@@ -1,0 +1,9 @@
+comment_new:
+    pattern:  /
+    defaults: { _controller: CommentBundle:CommentCreate:newComment }
+        
+comment_delete:
+    pattern:  /deleteComment/{commentId}
+    defaults: { _controller: CommentBundle:CommentDelete:deleteComment }
+    methods: POST
+

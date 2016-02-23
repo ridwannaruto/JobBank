@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	
+	<meta charset="utf-8">
+           <link rel="shortcut icon" href="{{asset('bundles/moraspiritstyle/img/favicon.ico')}}">
+	
+	<title>Volma</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Volunteer Management System">
+	<meta name="author" content="Ridwan Shariffdeen">
+        
+	<!-- The style -->
+	<link id="bs-css" href={{asset('bundles/moraspiritstyle/css/bootstrap-simplex.css')}} rel="stylesheet">
+	<style type="text/css">
+	  body {
+		padding-bottom: 40px;
+	  }
+	  .sidebar-nav {
+		padding: 9px 0;
+	  }
+	</style>
+	<link href={{asset('bundles/moraspiritstyle/css/bootstrap-responsive.css')}} rel="stylesheet">
+	<link href={{asset('bundles/moraspiritstyle/css/charisma-app.css')}} rel="stylesheet">
+	<link href={{asset('bundles/moraspiritstyle/css/jquery-ui-1.8.21.custom.css')}} rel="stylesheet">
+	<link href={{asset('bundles/moraspiritstyle/css/fullcalendar.css')}} rel='stylesheet'>
+	<link href={{asset('bundles/moraspiritstyle/css/fullcalendar.print.css' )}} rel='stylesheet'  media='print'>
+	<link href={{asset('bundles/moraspiritstyle/css/chosen.css')}} rel='stylesheet'>
+	<link href={{asset('bundles/moraspiritstyle/css/uniform.default.css')}} rel='stylesheet'>
+	<link href={{asset('bundles/moraspiritstyle/css/colorbox.css')}} rel='stylesheet'>
+	<link href={{asset('bundles/moraspiritstyle/css/jquery.cleditor.css')}} rel='stylesheet'>
+	<link href={{asset('bundles/moraspiritstyle/css/jquery.noty.css')}} rel='stylesheet'>
+	<link href={{asset('bundles/moraspiritstyle/css/noty_theme_default.css')}} rel='stylesheet'>
+	<link href={{asset('bundles/moraspiritstyle/css/elfinder.min.css')}} rel='stylesheet'>
+	<link href={{asset('bundles/moraspiritstyle/css/elfinder.theme.css')}} rel='stylesheet'>
+	<link href={{asset('bundles/moraspiritstyle/css/jquery.iphone.toggle.css')}} rel='stylesheet'>
+	<link href={{asset('bundles/moraspiritstyle/css/opa-icons.css')}} rel='stylesheet'>
+	<link href={{asset('bundles/moraspiritstyle/css/uploadify.css')}} rel='stylesheet'>
+
+
+        {% block css %}
+        {% endblock %}
+	<!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+	  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+	<!-- The fav icon -->
+	<link rel="shortcut icon" href="{{asset('bundles/moraspiritstyle/img/favicon.png')}}">
+		
+</head>
+
+<script>
+        FB.init({
+           // appId      : '878518675507348',
+            cookie     : true,  // enable cookies to allow the server to access
+            // the session
+            xfbml      : true,  // parse social plugins on this page
+            version    : 'v2.0' // use version 2.0
+        });
+</script>
+<body>
+{% block content %}
+    {% endblock %}
+
+<!-- external javascript
+	================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+        {% block javascripts %}
+        {% endblock %}
+	<!-- jQuery -->
+	<script src={{asset('bundles/moraspiritstyle/js/jquery-1.7.2.min.js')}}></script>
+	<!-- jQuery UI -->
+	<script src={{asset('bundles/moraspiritstyle/js/jquery-ui-1.8.21.custom.min.js')}}></script>
+	<!-- transition / effect library -->
+	<script src={{asset('bundles/moraspiritstyle/js/bootstrap-transition.js')}}></script>
+	<!-- alert enhancer library -->
+	<script src={{asset('bundles/moraspiritstyle/js/bootstrap-alert.js')}}></script>
+	<!-- modal / dialog library -->
+	<script src={{asset('bundles/moraspiritstyle/js/bootstrap-modal.js')}}></script>
+	<!-- custom dropdown library -->
+	<script src={{asset('bundles/moraspiritstyle/js/bootstrap-dropdown.js')}}></script>
+	<!-- scrolspy library -->
+	<script src={{asset('bundles/moraspiritstyle/js/bootstrap-scrollspy.js')}}></script>
+	<!-- library for creating tabs -->
+	<script src={{asset('bundles/moraspiritstyle/js/bootstrap-tab.js')}}></script>
+	<!-- library for advanced tooltip -->
+	<script src={{asset('bundles/moraspiritstyle/js/bootstrap-tooltip.js')}}></script>
+	<!-- popover effect library -->
+	<script src={{asset('bundles/moraspiritstyle/js/bootstrap-popover.js')}}></script>
+	<!-- button enhancer library -->
+	<script src={{asset('bundles/moraspiritstyle/js/bootstrap-button.js')}}></script>
+	<!-- accordion library (optional, not used in demo) -->
+	<script src={{asset('bundles/moraspiritstyle/js/bootstrap-collapse.js')}}></script>
+	<!-- carousel slideshow library (optional, not used in demo) -->
+	<script src={{asset('bundles/moraspiritstyle/js/bootstrap-carousel.js')}}></script>
+	<!-- autocomplete library -->
+	<script src={{asset('bundles/moraspiritstyle/js/bootstrap-typeahead.js')}}></script>
+	<!-- tour library -->
+	<script src={{asset('bundles/moraspiritstyle/js/bootstrap-tour.js')}}></script>
+	<!-- library for cookie management -->
+	<script src={{asset('bundles/moraspiritstyle/js/jquery.cookie.js')}}></script>
+	<!-- calander plugin -->
+	<script src={{asset('bundles/moraspiritstyle/js/fullcalendar.min.js')}}></script>
+	<!-- data table plugin -->
+	<script src={{asset('bundles/moraspiritstyle/js/jquery.dataTables.min.js')}}></script>
+
+	<!-- chart libraries start -->
+	<script src={{asset('bundles/moraspiritstyle/js/excanvas.js')}}></script>
+	<script src={{asset('bundles/moraspiritstyle/js/jquery.flot.min.js')}}></script>
+	<script src={{asset('bundles/moraspiritstyle/js/jquery.flot.pie.min.js')}}></script>
+	<script src={{asset('bundles/moraspiritstyle/js/jquery.flot.stack.js')}}></script>
+	<script src={{asset('bundles/moraspiritstyle/js/jquery.flot.resize.min.js')}}></script>
+	<!-- chart libraries end -->
+
+	<!-- select or dropdown enhancer -->
+	<script src={{asset('bundles/moraspiritstyle/js/jquery.chosen.min.js')}}></script>
+	<!-- checkbox, radio, and file input styler -->
+	<script src={{asset('bundles/moraspiritstyle/js/jquery.uniform.min.js')}}></script>
+	<!-- plugin for gallery image view -->
+	<script src={{asset('bundles/moraspiritstyle/js/jquery.colorbox.min.js')}}></script>
+	<!-- rich text editor library -->
+	<script src={{asset('bundles/moraspiritstyle/js/jquery.cleditor.min.js')}}></script>
+	<!-- notification plugin -->
+	<script src={{asset('bundles/moraspiritstyle/js/jquery.noty.js')}}></script>
+	<!-- file manager library -->
+	<script src={{asset('bundles/moraspiritstyle/js/jquery.elfinder.min.js')}}></script>
+	<!-- star rating plugin -->
+	<script src={{asset('bundles/moraspiritstyle/js/jquery.raty.min.js')}}></script>
+	<!-- for iOS style toggle switch -->
+	<script src={{asset('bundles/moraspiritstyle/js/jquery.iphone.toggle.js')}}></script>
+	<!-- autogrowing textarea plugin -->
+	<script src={{asset('bundles/moraspiritstyle/js/jquery.autogrow-textarea.js')}}></script>
+	<!-- multiple file upload plugin -->
+	<script src={{asset('bundles/moraspiritstyle/js/jquery.uploadify-3.1.min.js')}}></script>
+	<!-- history.js for cross-browser state change on ajax -->
+	<script src={{asset('bundles/moraspiritstyle/js/jquery.history.js')}}></script>
+	<!-- application script for Charisma demo -->
+	<script src={{asset('bundles/moraspiritstyle/js/charisma.js')}}></script>
+
+<script src={{asset('bundles/moraspiritstyle/js/fblogin.js')}}></script>
+    <script src="https://apis.google.com/js/plusone.js"></script>
+    <script src={{asset('bundles/moraspiritstyle/js/gplus.js')}}></script>
+
+</body>
+</html>

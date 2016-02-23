@@ -1,0 +1,276 @@
+<?php
+
+namespace Moraspirit\SiteBundle\Controller;
+
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Moraspirit\EntityBundle\Entity\User;
+use Moraspirit\NotificationBundle\Controller\sendEmailController;
+use Moraspirit\EntityBundle\Entity\Trackreport;
+use Moraspirit\EntityBundle\Form\UserType;
+use Moraspirit\EntityBundle\Entity\Confirmation;
+use Symfony\Component\HttpFoundation\Session\Session;
+
+class AuthenticationController extends Controller {
+
+    public function indexAction() {
+
+        return $this->render('MoraspiritSiteBundle:Index:index.html.twig');
+    }
+
+    public function loginAction(Request $request) {
+
+        if ($request->getMethod() == 'POST') {
+
+            $username = $request->get('username');
+            $password = $request->get('password');
+
+
+            $em = $this->getDoctrine()->getManager();
+            $repository = $em->getRepository('MoraspiritEntityBundle:User');
+
+            $user = $repository->findOneBy(array('username' => $username, 'password' => $password));
+
+            if ($user) {
+                $type = $user->getAccesslevel();
+                $name = $user->getFirstname();
+                $id = $user->getId();
+                $access = $user->getAccesslevel();
+                $status = $user->getStatus();
+                if ($status == 2) {
+                    $session = $this->getRequest()->getSession();
+                    $session->start();
+                    $session->set('name', $name);
+                    $session->set('user', $id);
+                    $session->set('access', $access);
+
+                    return $this->redirect('home');
+                }
+
+                if ($status == 1) {
+
+                    return $this->render('MoraspiritSiteBundle:Authentication:login.html.twig', array(
+                                'type' => 'E',
+                                'message' => 'Account Not Activated',
+                                'details' => 'please contact your pillar head to activate your account'
+                    ));
+                }
+                if ($status == 0) {
+                    return $this->render('MoraspiritSiteBundle:Authentication:login.html.twig', array(
+                                'type' => 'E',
+                                'message' => 'Account Not Activated',
+                                'details' => 'please check your email to activate your account'
+                    ));
+                }
+            }
+
+            return $this->render('MoraspiritSiteBundle:Authentication:login.html.twig', array(
+                        'type' => 'E',
+                        'message' => 'Invalid Login'
+            ));
+        }
+
+        return $this->render('MoraspiritSiteBundle:Authentication:login.html.twig');
+    }
+
+    public function logoutAction() {
+        $session = $this->getRequest()->getSession();
+        $session->clear();
+        return $this->render('MoraspiritSiteBundle:Authentication:login.html.twig');
+    }
+
+    public function activateAction($userID) {
+
+        $user = $this->authenticateAction();
+        if ($user) {
+            $access = $user->getAccesslevel();
+            if ($access == 'Head' || $access == 'Admin') {
+                //echo ($userID);
+                $em = $this->getDoctrine()->getManager();
+                $user = $em->getRepository('MoraspiritEntityBundle:User')->find($userID);
+                $confirmation = $em->getRepository('MoraspiritEntityBundle:Confirmation')->findOneBy(array('email' => $user->getEmail()));
+                $user->setStatus(2);
+                $em->persist($user);
+
+
+                try {
+                    $em->remove($confirmation);
+                    $em->flush();
+                } catch (\Exception $e) {
+                    return $this->render('MoraspiritStyleBundle:Error:error.html.twig', array(
+                                'message' => ' either this account is already activated or this account does not exists'
+                    ));
+                }
+
+                return $this->render('MoraspiritStyleBundle:Success:success.html.twig', array(
+                            'message' => ' successfully activated the account'
+                ));
+            } else {
+                return $this->render('MoraspiritStyleBundle:Error:permission.html.twig');
+            }
+        }
+        return $this->redirect($this->generateUrl('moraspirit_site_login'));
+    }
+
+    public function deleteConfirmationAction($verification, $email) {
+       
+       
+                $em = $this->getDoctrine()->getManager();
+                $user = $em->getRepository('MoraspiritEntityBundle:User')->findOneBy(array('email' => $email));
+                $confirmations = $em->getRepository('MoraspiritEntityBundle:Confirmation');
+                $confirmation = $confirmations->findOneBy(array('email' => $email));
+		if ($confirmation != null){
+		        if ($confirmation->getVerification() == $verification) {
+		            $em->remove($user);
+		            $em->remove($confirmation);
+			    $em->flush();
+
+		            return $this->render('MoraspiritStyleBundle:Success:success.html.twig', array(
+		                        'message' => 'account was deleted'
+		            ));
+		        } else {
+		            return $this->render('MoraspiritStyleBundle:Error:permission.html.twig');
+		        }
+		}
+		else	{
+	 		return $this->render('MoraspiritStyleBundle:Error:error.html.twig', array(
+                                'message' => 'This Link is Expired'
+                    	));
+		}
+
+             
+    }
+
+    public function verifyAction($verification, $email) {
+        $em = $this->getDoctrine()->getManager();
+                $user = $em->getRepository('MoraspiritEntityBundle:User')->findOneBy(array('email' => $email));
+		if ($user != null){
+			$user->setStatus(1);
+                	$confirmations = $em->getRepository('MoraspiritEntityBundle:Confirmation');
+		        $confirmation = $confirmations->findOneBy(array('email' => $email));
+			if ($confirmation != null){
+				if ($confirmation->getVerification() == $verification) {					
+					    $em->remove($confirmation);
+					    $em->flush();
+
+					    return $this->render('MoraspiritStyleBundle:Success:success.html.twig', array(
+						        'message' => 'Email confirmation is done. Please contact Pillar Head to activate your Account'
+					    ));
+                		} else {
+                   			 return $this->render('MoraspiritStyleBundle:Error:permission.html.twig');
+                		}
+			} else{
+ 				return $this->render('MoraspiritStyleBundle:Error:error.html.twig', array(
+                                'message' => 'Your account is being processed'
+                    		));
+			}
+		}else	{
+	 		return $this->render('MoraspiritStyleBundle:Error:error.html.twig', array(
+                                'message' => 'User not FOUND'
+                    	));
+		}
+             
+    }
+
+    public function registerAction(Request $request) {
+        $user = new User();
+        $form = $this->createForm(new UserType(), $user, array(
+            'action' => $this->generateUrl('moraspirit_site_register'),
+            'attr' => array(
+                'class' => 'form-horizontal center'
+            )
+        ));
+
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $user = $form->getData();
+            $user->setAccesslevel('Spiriter');
+            $user->setStatus(0);
+            $career = new TrackReport();
+            $career->setOverallrating(0);
+            $career->setTotalweight(0);
+
+
+            try {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($user);
+
+                $em->flush();
+
+                $repository = $em->getRepository('MoraspiritEntityBundle:User');
+                $newuser = $repository->findOneBy(array('username' => $user->getUsername()));
+
+                $career->setUser($newuser->getId());
+                $em->persist($career);
+                $em->flush();
+                $this->sendConfirmationAction($user->getEmail(), $user->getFirstname());
+            } catch (\Exception $e) {
+                return $this->render('MoraspiritSiteBundle:Authentication:register.html.twig', array(
+                            'type' => 'E',
+                            'message' => ' Opz! Something went wrong. Please Try again',
+                            'details' => 'Duplicate Values',
+                            'form' => $form->createView()
+                ));
+            }
+
+
+            return $this->render('MoraspiritSiteBundle:Authentication:login.html.twig', array(
+                        'type' => 'S',
+                        'message' => ' Congratulations! You are now an Moraspiriter',
+                        'details' => ' an email has been sent to ' . $user->getEmail(),
+            ));
+        }
+
+
+
+        return $this->render('MoraspiritSiteBundle:Authentication:register.html.twig', array('form' => $form->createView()));
+    }
+
+    private function sendConfirmationAction($email, $name) {
+
+
+        $confirmation = new Confirmation();
+        $confirmation->setEmail($email);
+        $confirmation->setVerification(dechex(rand(10000000, 99999999)));
+        $em = $this->getDoctrine()->getManager();
+	try{
+        $em->persist($confirmation);
+	$em->flush();
+	}
+	catch (\Exception $e){
+		echo "ERROR IN CREATING CONFIRMATION";
+	}
+        $activate = "www.pixelzexplorer.org/Moraspirit/web/activate/" . $confirmation->getVerification() . "/" . $email;
+        $delete = "www.pixelzexplorer.org/Moraspirit/web/delete/" . $confirmation->getVerification() . "/" . $email;
+
+        // echo "Got Here ".$username." ".$firstname;
+        $message = \Swift_Message::newInstance()
+                ->setSubject('Volma Registration')
+                ->setFrom('moraspirit@gmail.com')
+                ->setTo($email)
+                ->setBcc('rshariffdeen@gmail.com')
+                ->setBody(
+                $this->renderView(
+                        'MoraspiritNotificationBundle:Register:confirm.html.twig', array('name' => $name, 'delete' => $delete, 'activate' => $activate)
+                ), 'text/html'
+                )
+        ;
+        $this->get('mailer')->send($message);
+    }
+
+    private function authenticateAction() {
+        $session = $this->getRequest()->getSession();
+        $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository('MoraspiritEntityBundle:User');
+        $id = $session->get('user');
+        $user = $repository->findOneBy(array('id' => $id));
+        if ($user) {
+            return $user;
+        } else {
+            return false;
+        }
+    }
+
+}

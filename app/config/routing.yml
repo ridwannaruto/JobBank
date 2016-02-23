@@ -1,0 +1,33 @@
+bundle_core:
+    resource: "@CoreBundle/Resources/config/routing.yml"
+    prefix:   /
+
+bundle_comment:
+    resource: "@CommentBundle/Resources/config/routing.yml"
+    prefix:   /
+
+bundle_notification:
+    resource: "@NotificationBundle/Resources/config/routing.yml"
+    prefix:   /
+
+bundle_project:
+    resource: "@ProjectBundle/Resources/config/routing.yml"
+    prefix:   /
+
+bundle_task:
+    resource: "@TaskBundle/Resources/config/routing.yml"
+    prefix:   /
+
+bundle_event:
+    resource: "@EventBundle/Resources/config/routing.yml"
+    prefix:   /
+
+bundle_user:
+    resource: "@UserBundle/Resources/config/routing.yml"
+    prefix:   /
+
+
+bundle_entity:
+    resource: "@NewsBundle/Resources/config/routing.yml"
+    prefix:   /
+

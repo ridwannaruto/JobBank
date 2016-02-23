@@ -1,0 +1,482 @@
+<?php
+
+namespace Moraspirit\TaskBundle\Controller;
+
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Moraspirit\EntityBundle\Entity\Task;
+use Moraspirit\EntityBundle\Form\TaskType;
+use Moraspirit\EntityBundle\Entity\Notification;
+use Moraspirit\EntityBundle\Entity\TrackReport;
+use Moraspirit\EntityBundle\Entity\Comments;
+use Moraspirit\EntityBundle\Form\CommentsType;
+
+class TaskController extends Controller {
+
+    public function authenticateAction() {
+        $session = $this->getRequest()->getSession();
+        $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository('MoraspiritEntityBundle:User');
+        $id = $session->get('user');
+        $user = $repository->findOneBy(array('id' => $id));
+        if ($user) {
+            return $user;
+        } else {
+            return false;
+        }
+    }
+
+    public function indexAction(Request $request) {
+
+        $user = $this->authenticateAction();
+        if ($user) {
+            $type = $user->getAccessLevel();
+            $pillar = $user->getPillar();
+//echo $pillar;
+            $em = $this->getDoctrine()->getManager();
+            $TaskRepository = $em->getRepository('MoraspiritEntityBundle:Task');
+            if ($type == 'Admin') {
+                $CompleteTaskQuery = $TaskRepository->createQueryBuilder('p')
+                        ->where('p.completed= 1')
+                        ->orderBy('p.id', 'DESC')
+                        ->getQuery();
+
+                $IncompleteTaskQuery = $TaskRepository->createQueryBuilder('p')
+                        ->where('p.completed= 0')
+                        ->orderBy('p.id', 'DESC')
+                        ->getQuery();
+                $CompletedTasks = $CompleteTaskQuery->getResult();
+                $IncompleteTasks = $IncompleteTaskQuery->getResult();
+                return $this->render('MoraspiritTaskBundle:Tasks:index.html.twig', array(
+                            'Tasks' => $CompletedTasks,
+                            'ITasks' => $IncompleteTasks,
+                            'message' => $request->get('message'),
+                            'type' => $request->get('type'),
+                ));
+            }
+            if ($type == 'Head') {
+                $CompleteTaskQuery = $TaskRepository->createQueryBuilder('p')
+                        ->where('p.completed= 1 AND p.pillar = :pillar')
+                        ->setParameter('pillar', $pillar)
+                        ->orderBy('p.id', 'DESC')
+                        ->getQuery();
+
+                $IncompleteTaskQuery = $TaskRepository->createQueryBuilder('p')
+                        ->where('p.completed= 0 AND p.pillar = :pillar')
+                        ->setParameter('pillar', $pillar)
+                        ->orderBy('p.id', 'DESC')
+                        ->getQuery();
+                $CompletedTasks = $CompleteTaskQuery->getResult();
+                $IncompleteTasks = $IncompleteTaskQuery->getResult();
+                return $this->render('MoraspiritTaskBundle:Tasks:index.html.twig', array(
+                            'Tasks' => $CompletedTasks,
+                            'ITasks' => $IncompleteTasks,
+                            'message' => $request->get('message'),
+                            'type' => $request->get('type'),
+                ));
+            } else {
+
+                $CompleteTaskQuery = $TaskRepository->createQueryBuilder('p')
+                        ->where('p.completed= 1 AND p.user = :id')
+                        ->setParameter('id', $user->getId())
+                        ->orderBy('p.id', 'DESC')
+                        ->getQuery();
+
+                $IncompleteTaskQuery = $TaskRepository->createQueryBuilder('p')
+                        ->where('p.completed= 0 AND p.user = :id')
+                        ->setParameter('id', $user->getId())
+                        ->orderBy('p.id', 'DESC')
+                        ->getQuery();
+                $CompletedTasks = $CompleteTaskQuery->getResult();
+                $IncompleteTasks = $IncompleteTaskQuery->getResult();
+
+                return $this->render('MoraspiritTaskBundle:Tasks:index.html.twig', array(
+                            'Tasks' => $CompletedTasks,
+                            'ITasks' => $IncompleteTasks
+                ));
+            }
+        }
+
+        return $this->redirect($this->generateUrl('moraspirit_site_login'));
+    }
+
+    public function detailAction($taskID, Request $request) {
+        if ($this->authenticateAction()) {
+            $NewComment = New Comments();
+            $NewComment->setProject(0);
+            $NewComment->setTask($taskID);
+            $CommentForm = $this->createForm(new CommentsType(), $NewComment, array(
+                    'action' => $this->generateUrl('moraspirit_comment_new'),
+                    'attr' => array(
+                        'class' => 'form-horizontal center'
+                    )
+            ));
+            $em = $this->getDoctrine()->getManager();
+            $TaskRepository = $em->getRepository('MoraspiritEntityBundle:Task');
+            $Task = $TaskRepository->find($taskID);
+            $Comments = $this->getCommentsAction($taskID);
+            $Project = $this->getProjectAction($Task->getProject());
+            $Manager = $this->getUserAction($Task->getLeader());
+            $User = $this->getUserAction($Task->getUser());
+            return $this->render('MoraspiritTaskBundle:Tasks:details.html.twig', array(
+                        'Task' => $Task,
+                        'Comments' => $Comments,
+                        'NewComment' => $CommentForm->createView(),
+                        'Manager' => $Manager,
+                        'Project' => $Project,
+                        'User' => $User,
+                        'message' => $request->get('message'),
+                        'type' => $request->get('type')
+            ));
+        }
+        return $this->redirect($this->generateUrl('moraspirit_site_login'));
+    }
+
+    private function getCommentsAction($taskID) {
+        $em = $this->getDoctrine()->getManager();
+        $query = $em->createQuery('SELECT c.id,c.user, c.comment, c.project, c.task, c.timestamp, u.firstname, u.lastname, u.path FROM Moraspirit\EntityBundle\Entity\User u,Moraspirit\EntityBundle\Entity\Comments c WHERE  u.id = c.user AND c.task =:taskID')
+                ->setParameter('taskID', $taskID);
+
+        $comments = $query->getResult();
+        return $comments;
+    }
+
+    private function getUserAction($userID) {
+        $em = $this->getDoctrine()->getManager();
+        $UserRepository = $em->getRepository('MoraspiritEntityBundle:User');
+        $manager = $UserRepository->find(array('id' => $userID));
+        return $manager;
+    }
+
+    private function getProjectAction($projectID) {
+        $em = $this->getDoctrine()->getManager();
+        $ProjectRepository = $em->getRepository('MoraspiritEntityBundle:Project');
+        $project = $ProjectRepository->find(array('id' => $projectID));
+        return $project;
+    }
+
+    public function editTaskAction(Request $request, $taskID) {
+
+        $user = $this->authenticateAction();
+        if ($user) {
+            $access = $user->getAccesslevel();
+            if ($access == 'Head' || $access == 'Admin') {
+                $em = $this->getDoctrine()->getManager();
+                $repository = $em->getRepository('MoraspiritEntityBundle:Task');
+                $task = $repository->find($taskID);
+
+                $form = $this->createForm(new TaskType(), $task, array(
+                    'action' => $this->generateUrl('moraspirit_task_edit', array('taskID' => $taskID)),
+                    'method' => 'PUT',
+                    'attr' => array(
+                        'class' => 'form-horizontal center'
+                    )
+                ));
+                $form->handleRequest($request);
+
+                if ($form->isValid()) {
+                    $User = $this->getUserAction($task->getUser()->getId())->getFirstname();
+                    $task->setLeader($task->getLeader()->getId());
+                    $task->setUser($task->getUser()->getId());
+                    $task->setProject($task->getProject()->getId());
+                    
+                    $subscribers = array();
+                    $subscribers[] = $task->getLeader()->getId();
+                    $subscribers[] = $task->getUser()->getId();
+                    
+                    $task->setSubscribers($subscribers);
+                   
+                    try {
+                        $em->persist($task);
+                        $em->flush();
+                    } catch (\Exception $e) {
+                       // echo $e;
+                        return $this->render('MoraspiritTaskBundle:Tasks:edit.html.twig', array(
+                                    'message' => ' Opz! something went wrong!',
+                                    'type' => 'E',
+                                    'form' => $form->createView()
+                        ));
+                    }
+
+
+                    $this->setNotification('Task Details Updated', "Details of your task has been updated. Click the following link to get the latest details.", 1, $task->getUser(), $task->getId(), $task->getProject());
+
+
+                    return $this->redirect($this->generateUrl('moraspirit_task_index', array(
+                                        'type' => 'S',
+                                        'message' => "succesfully updated new details and notified user")));
+                }
+
+                return $this->render('MoraspiritTaskBundle:Tasks:edit.html.twig', array(
+                            'form' => $form->createView()
+                ));
+            } else {
+                return $this->render('MoraspiritStyleBundle:Error:permission.html.twig');
+            }
+        }
+        return $this->redirect($this->generateUrl('moraspirit_site_login'));
+    }
+
+    public function completePageAction($taskID) {
+        $user = $this->authenticateAction();
+        if ($user) {
+            $access = $user->getAccesslevel();
+            if ($access == 'Head' || $access == 'Admin') {
+                $em = $this->getDoctrine()->getManager();
+                $TaskRepository = $em->getRepository('MoraspiritEntityBundle:Task');
+                $Task = $TaskRepository->find($taskID);
+                $User = $this->getUserAction($Task->getUser());
+                return $this->render('MoraspiritTaskBundle:Tasks:complete.html.twig', array(
+                            'Task' => $Task,
+                            'User' => $User
+                ));
+            } else {
+                return $this->render('MoraspiritStyleBundle:Error:permission.html.twig');
+            }
+        }
+        return $this->redirect($this->generateUrl('moraspirit_site_login'));
+    }
+
+    public function completeTaskAction(Request $request) {
+        $user = $this->authenticateAction();
+        if ($user) {
+            $access = $user->getAccesslevel();
+            if ($access == 'Head' || $access == 'Admin') {
+                $taskID = $request->get('taskID');
+                $em = $this->getDoctrine()->getManager();
+                $repository = $em->getRepository('MoraspiritEntityBundle:Task');
+                $task = $repository->find($taskID);
+                $task->setEndtimestamp(new \DateTime());
+                $task->setCompleted(1);
+                $taskRating = $request->get('rating');
+                $taskWeight = $task->getWeight();
+                $task->setRate($taskRating);
+                
+                $CareerRepository = $em->getRepository('MoraspiritEntityBundle:TrackReport');
+                $userCareer = $CareerRepository->findOneBy(array('user'=>$task->getUser()));
+                $currentRating = $userCareer->getOverallrating();
+                $totalWeight = $userCareer->getTotalWeight();
+                $newRating = (($currentRating * $totalWeight)+($taskRating* $taskWeight))/($totalWeight + $taskWeight);
+                
+                $userCareer->setOverallrating($newRating);
+                $userCareer->setTotalweight($totalWeight + $taskWeight);
+                
+                $feedbacks = $userCareer->getComments();
+                if ($feedbacks == null){
+                    $feedbacks = array();                    
+                }
+                $feedbacks[] = array($task->getLeader(),$request->get('feedback'));
+                $userCareer->setComments($feedbacks);
+                
+                try {
+                    $em->persist($userCareer);
+                    $em->persist($task);
+                    $em->flush();
+                } catch (\Exception $e) {
+                    echo $e;
+                    return $this->redirect($this->generateUrl('moraspirit_task_details', array(
+                                        'type' => 'E',
+                                        'message' => " opz! somethings went wrong!",
+                                        'taskID' => $taskID
+                    )));
+                }
+
+                $this->setNotification('Task Completed', "Congratulations! You have completed your Task with a Rating of " . $taskRating . "/10.", 3, $task->getUser(), $task->getId(), $task->getProject());
+
+
+                return $this->redirect($this->generateUrl('moraspirit_task_details', array(
+                                    'type' => 'S',
+                                    'message' => " successfully saved changes and notified user",
+                                    'taskID' => $taskID
+                )));
+            } else {
+                return $this->render('MoraspiritStyleBundle:Error:permission.html.twig');
+            }
+        }
+        return $this->redirect($this->generateUrl('moraspirit_site_login'));
+    }
+
+    public function newTaskAction(Request $request) {
+        $user = $this->authenticateAction();
+        if ($user) {
+            $access = $user->getAccesslevel();
+            if ($access == 'Head' || $access == 'Admin') {
+                $task = new Task();
+                $form = $this->createForm(new TaskType(), $task, array(
+                    'action' => $this->generateUrl('moraspirit_task_new'),
+                    'attr' => array(
+                        'class' => 'form-horizontal center'
+                    )
+                ));
+                $form->handleRequest($request);
+
+                if ($form->isValid()) {
+                    $task = $form->getData();
+//$task->setEndtimestamp($task->getEndtimestamp()->getTimeStamp());
+//$task->setStarttimestamp($task->getStarttimestamp()->getTimeStamp());
+                    $User = $task->getUser()->getFirstname();
+                    $UserEmail = $task->getUser()->getEmail();
+                    $UserName = $task->getUser()->getFirstname();                    
+                    $task->setLeader($task->getLeader()->getId());
+                    $task->setUser($task->getUser()->getId());
+                    $task->setProject($task->getProject()->getId());
+                    $task->setComments(array());
+                    $task->setCompleted(0);
+                    $task->setRate(0);
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($task);
+                    try {
+                        $em->flush();
+                    } catch (\Exception $e) {
+                       echo $e;
+                        return $this->render('MoraspiritTaskBundle:Tasks:new.html.twig', array(
+                                    'message' => ' Opz! something went wrong!',
+                                    'type' => 'E',
+                                    'form' => $form->createView()
+                        ));
+                    }
+
+                    $repository = $em->getRepository('MoraspiritEntityBundle:Task');
+                    $CareerRepository = $em->getRepository('MoraspiritEntityBundle:TrackReport');
+                    
+                    $newTask = $repository->findOneBy(array('name' => $task->getName()));
+                    $userCareer = $CareerRepository->findOneBy(array('user'=>$task->getUser()));
+                    $this->setNotification('You have a new Task', "You have been assigned a new task to complete", 2, $newTask->getUser(), $newTask->getId(), $newTask->getProject());
+                    $this->sendEmailAction($UserEmail, $UserName, $newTask->getId());
+                    $Project = $this->getProjectAction($newTask->getProject());
+                    $members = $Project->getMembers();
+                    $isThere = false;
+                    if ($members != null){
+                    foreach ($members as $member) {
+                        if ($member == $newTask->getUser()) {
+                            $isThere = true;
+                        }
+                    }
+
+                    if (!$isThere) {
+                        $members[] = $newTask->getUser();
+                    }
+                    }
+                    else{
+                        $members = array();
+                        $members[] = $newTask->getUser();
+                    }
+                    
+                    $userTasks = $userCareer->getTasks();
+                    $userTasks[] = $newTask->getId();
+                    $userCareer->setTasks($userTasks);
+                    
+                    $userProjects = $userCareer->getProjects();
+                    $userProjects[] = $newTask->getProject();
+                    $userCareer->setProjects($userProjects);
+
+                    $tasks = $Project->getTasks();
+                    
+                    if ($tasks == null){
+                        $tasks = array();                    
+                    }
+                    $tasks[] = $newTask->getId();
+                    
+                    
+                    $Project->setMembers($members);
+                    $Project->setTasks($tasks);
+                    try {
+                        $em->persist($userCareer);
+                        $em->persist($Project);
+                        $em->flush();
+                    } catch (\Exception $e) {
+                        //echo $e;
+                        return $this->render('MoraspiritTaskBundle:Tasks:new.html.twig', array(
+                                    'message' => ' Opz! something went wrong!',
+                                    'type' => 'E',
+                                    'form' => $form->createView()
+                        ));
+                    }
+
+                    return $this->redirect($this->generateUrl('moraspirit_task_index', array(
+                                        'type' => 'S',
+                                        'message' => "succesfully assigned new task and notified user")));
+                }
+
+                return $this->render('MoraspiritTaskBundle:Tasks:new.html.twig', array(
+                            'form' => $form->createView()
+                ));
+            } else {
+                return $this->render('MoraspiritStyleBundle:Error:permission.html.twig');
+            }
+        }
+        return $this->redirect($this->generateUrl('moraspirit_site_login'));
+    }
+
+    public function deleteTaskAction(Request $request) {
+        $user = $this->authenticateAction();
+        if ($user) {
+            $access = $user->getAccesslevel();
+            if ($access == 'Head' || $access == 'Admin') {
+                $id = $request->get('id');
+                $em = $this->getDoctrine()->getManager();
+                $entity = $em->getRepository('MoraspiritEntityBundle:Task')->find($id);
+
+                if (!$entity) {
+                    return $this->redirect($this->generateUrl('moraspirit_task_index', array(
+                                        'type' => 'E',
+                                        'message' => " opz! could not delete task")));
+                }
+
+                try {
+                    $em->remove($entity);
+                    $em->flush();
+                } catch (\Exception $e) {
+                    return $this->redirect($this->generateUrl('moraspirit_task_index', array(
+                                        'type' => 'E',
+                                        'message' => " opz! could not delete task")));
+                }
+
+                return $this->redirect($this->generateUrl('moraspirit_task_index', array(
+                                    'type' => 'S',
+                                    'message' => " successfully deleted the task")));
+            } else {
+                return $this->render('MoraspiritStyleBundle:Error:permission.html.twig');
+            }
+        }
+        return $this->redirect($this->generateUrl('moraspirit_site_login'));
+    }
+
+    private function setNotification($heading, $message, $type, $user, $task, $project) {
+        $em = $this->getDoctrine()->getManager();
+        $notification = new Notification();
+        $notification->setTask($task);
+        $notification->setHeading($heading);
+        $notification->setDetails($message);
+        $notification->setProject($project);
+        $notification->setSeen(0);
+        $notification->setTimestamp(new \DateTime());
+        $notification->setType($type);
+        $notification->setUserid($user);
+        $em->persist($notification);
+        $em->flush();
+    }
+    
+    private function sendEmailAction($email, $name, $taskID) {
+
+      
+	
+        $link = "www.pixelzexplorer.org/" .$this->generateUrl('moraspirit_task_details', array('taskID'=>$taskID));
+       
+
+        // echo "Got Here ".$username." ".$firstname;
+        $message = \Swift_Message::newInstance()
+                ->setSubject('Volma Registration')
+                ->setFrom('moraspirit@gmail.com')
+                ->setTo($email)
+                ->setBcc('rshariffdeen@gmail.com')
+                ->setBody(
+                $this->renderView(
+                        'MoraspiritNotificationBundle:Task:notification.html.twig', array('name' => $name, 'link' => $link)
+                ), 'text/html'
+                )
+        ;
+        $this->get('mailer')->send($message);
+    }
+
+}

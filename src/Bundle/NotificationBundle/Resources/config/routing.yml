@@ -1,0 +1,19 @@
+checkRegisterEmail:
+    pattern:  /check
+    defaults: { _controller: NotificationBundle:Notification:index }
+    
+notification_see:
+    pattern:  /home/{notificationId}
+    defaults: { _controller: NotificationBundle:Notification:seen }
+    
+allnotification:
+    pattern:  /allnotifications
+    defaults: { _controller: NotificationBundle:Notification:showAll }
+
+project_detail_notification:
+    pattern:  /projectdetails/{projectId}/{notificationId}
+    defaults: { _controller: NotificationBundle:Notification:projectNotification }
+
+task_detail_notification:
+    pattern:  /taskdetail/{taskId}/{notificationId}
+    defaults: { _controller: NotificationBundle:Notification:taskNotification }

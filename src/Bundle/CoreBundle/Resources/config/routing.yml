@@ -1,0 +1,40 @@
+user_home:
+    pattern:  /home
+    defaults: { _controller: CoreBundle:Home:index }
+
+auth_login:
+    pattern:  /login
+    defaults: { _controller: CoreBundle:Authentication:loginUser }
+
+auth_logout:
+    pattern:  /logout
+    defaults: { _controller: CoreBundle:Authentication:logoutUser }
+
+user_register:
+    pattern:  /register
+    defaults: { _controller: CoreBundle:Authentication:registerUser }
+
+auth_email_verification:
+    pattern:  /activate/{verification}/{email}
+    defaults: { _controller: CoreBundle:Authentication:verifyEmail }
+
+auth_delete_confirmation:
+    pattern:  /delete/{verification}/{email}
+    defaults: { _controller: CoreBundle:Authentication:deleteConfirmation }
+
+news_feed:
+    pattern:  /newsfeed
+    defaults: { _controller: CoreBundle:News:news }
+
+
+user_approve:
+    pattern:  /activate/{userId}
+    defaults: { _controller: CoreBundle:Authentication:activateUser }
+
+user_reject:
+    pattern:  /reject/{userId}
+    defaults: { _controller: CoreBundle:Authentication:rejectUser }
+
+
+
+

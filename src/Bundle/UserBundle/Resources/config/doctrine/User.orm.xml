@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Bundle\UserBundle\Entity\User" table="user">
+    <unique-constraints>
+      <unique-constraint name="username" columns="username"/>
+      <unique-constraint name="nic" columns="nic"/>
+      <unique-constraint name="email" columns="email,mobilenumber"/>
+    </unique-constraints>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="username" type="string" column="username" length="30" nullable="false"/>
+    <field name="password" type="string" column="password" length="30" nullable="false"/>
+    <field name="firstname" type="string" column="firstname" length="20" nullable="false"/>
+    <field name="lastname" type="string" column="lastname" length="20" nullable="false"/>
+    <field name="email" type="string" column="email" length="30" nullable="false"/>
+    <field name="gender" type="string" column="gender" length="10" nullable="false"/>
+    <field name="phonenumber" type="string" column="phoneNumber" length="15" nullable="false"/>
+    <field name="dateofbirth" type="text" column="dateOfBirth" nullable="false"/>
+    <field name="namewithinitials" type="string" column="nameWithInitials" length="30" nullable="false"/>
+    <field name="nic" type="string" column="nic" length="15" nullable="false"/>
+    <field name="mobilenumber" type="string" column="mobilenumber" length="15" nullable="false"/>
+    <field name="accesslevel" type="string" column="accesslevel" length="15" nullable="false"/>
+    <field name="address" type="string" column="address" length="255" nullable="false"/>
+    <field name="city" type="string" column="city" length="15" nullable="false"/>
+    <field name="country" type="string" column="country" length="15" nullable="false"/>
+    <field name="pillar" type="text" column="Pillar" nullable="false"/>
+    <field name="department" type="text" column="Department" nullable="false"/>
+    <field name="batch" type="integer" column="Batch" nullable="false"/>
+    <field name="skills" type="array" column="Skills" nullable="false"/>
+    <field name="status" type="integer" column="status" nullable="true"/>
+     <field name="path" type="text" column="path" nullable="true"/>
+      <field name="lastlogin" type="datetime" column="lastlogin" nullable="true"/>
+  </entity>
+</doctrine-mapping>

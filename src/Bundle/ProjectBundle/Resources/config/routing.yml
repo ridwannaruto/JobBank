@@ -1,0 +1,29 @@
+project_index:
+    pattern:  /project/index
+    defaults: { _controller: ProjectBundle:ProjectList:viewList }
+    
+project_detail:
+    pattern:  /project/view/{projectId}
+    defaults: { _controller: ProjectBundle:ProjectView:view }
+    
+project_new:
+    pattern:  /project/new
+    defaults: { _controller: ProjectBundle:ProjectCreate:newProject}
+    
+project_edit:
+    pattern:  /project/edit/{projectId}
+    defaults: { _controller: ProjectBundle:ProjectUpdate:editProject }
+
+    
+project_delete:
+    pattern:  /project/delete/{projectId}
+    defaults: { _controller: ProjectBundle:ProjectDelete:deleteProject }
+    methods: POST
+    
+project_complete:
+    pattern:  /project/complete/{projectId}
+    defaults: { _controller: ProjectBundle:ProjectUpdate:complete }
+    methods: POST
+    
+
+    

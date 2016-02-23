@@ -1,0 +1,31 @@
+user_profile:
+    pattern:  /profile/{userId}
+    defaults: { _controller: UserBundle:UserProfile:viewProfile }
+    
+change_password:
+    pattern:  /changepassword
+    defaults: { _controller: UserBundle:UserAccount:changePassword }
+
+forgot_password:
+    pattern:  /forgotpassword
+    defaults: { _controller: UserBundle:UserAccount:resetPassword }
+
+reset_password:
+    pattern:  /{userId}/resetpassword
+    defaults: { _controller: UserBundle:UserAccount:resetPassword }
+    
+profile_edit:
+    pattern:  /editprofile
+    defaults: { _controller: UserBundle:UserProfile:editProfile }
+    
+profile_picture:
+    pattern:  /profilepicture
+    defaults: { _controller: UserBundle:UserProfile:updatePicture }
+
+volunteer_list:
+    pattern:  /volunteer/list
+    defaults: { _controller: UserBundle:UserList:viewList }
+
+department:
+    pattern:  /pillar/{pillarName}
+    defaults: { _controller: UserBundle:Department:detail }

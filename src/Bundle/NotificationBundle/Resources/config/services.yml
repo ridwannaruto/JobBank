@@ -1,0 +1,7 @@
+parameters:
+#    moraspirit_notification.example.class: Moraspirit\NotificationBundle\Example
+
+services:
+#    moraspirit_notification.example:
+#        class: %moraspirit_notification.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

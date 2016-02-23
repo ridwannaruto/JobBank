@@ -1,0 +1,7 @@
+parameters:
+#    moraspirit_entity.example.class: Moraspirit\NewsBundle\Example
+
+services:
+#    moraspirit_entity.example:
+#        class: %moraspirit_entity.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

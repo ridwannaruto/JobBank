@@ -1,0 +1,194 @@
+{%  extends "CoreBundle:Base:base.html.twig" %}
+{% block dashboard %}
+{% endblock %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row-fluid">
+
+        <noscript>
+        <div class="alert alert-block span12">
+            <h4 class="alert-heading">Warning!</h4>
+            <p>You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a> enabled to use this site.</p>
+        </div>
+        </noscript>
+        <div id="content" class="span2">
+
+        </div>
+        <div id="content" class="span7">
+            <!-- content starts -->
+
+            <div class="row-fluid">
+                
+                <h2><i class="icon-locked"></i> Edit Profile</h2>
+                        <hr>
+
+                        {{ form_start(form) }}
+                        
+                                    {% if details is defined %}
+                        <br><br>
+                        <div class="alert alert-info">
+                    {{details}}
+                        </div>
+                        <br><br>
+                {% endif %}
+                        
+
+                        <div class="control-group primary">
+                                {{form_label(form.username, 'Username',{ 'label_attr': {'class': 'control-label'} })}}
+
+                            <div class="controls">
+                                    {{form_widget(form.username)}}
+                                <span class="help-inline">{{ form_errors(form.username) }}</span>
+                            </div>
+                        </div>
+
+                        <div class="control-group primary">
+                                {{form_label(form.firstname, 'First Name',{ 'label_attr': {'class': 'control-label'} })}}
+
+                            <div class="controls">
+                                    {{form_widget(form.firstname)}}
+                                <span class="help-inline">{{ form_errors(form.firstname) }}</span>
+                            </div>
+                        </div>
+
+                        <div class="control-group primary">
+                                {{form_label(form.lastname, 'Last Name',{ 'label_attr': {'class': 'control-label'} })}}
+
+                            <div class="controls">
+                                    {{form_widget(form.lastname)}}
+                                <span class="help-inline">{{ form_errors(form.lastname) }}</span>
+                            </div>
+                        </div>
+
+
+                        <div class="control-group primary">
+                                {{form_label(form.namewithinitials, 'Name with Initials',{ 'label_attr': {'class': 'control-label'} })}}
+
+                            <div class="controls">
+                                    {{form_widget(form.namewithinitials)}}
+                                <span class="help-inline">{{ form_errors(form.namewithinitials) }}</span>
+                            </div>
+                        </div>
+
+                        <div class="control-group primary">
+                                {{form_label(form.gender, 'Gender',{ 'label_attr': {'class': 'control-label'} })}}
+
+                            <div class="controls">
+                                    {{form_widget(form.gender)}}
+                                <span class="help-inline">{{ form_errors(form.gender) }}</span>
+                            </div>
+                        </div>
+
+                        <div class="control-group primary">
+                                {{form_label(form.nic, 'NIC Number',{ 'label_attr': {'class': 'control-label'} })}}
+
+                            <div class="controls">
+                                    {{form_widget(form.nic)}}
+                                <span class="help-inline">{{ form_errors(form.nic) }}</span>
+                            </div>
+                        </div>
+
+
+
+                  
+
+                        <div class="control-group primary">
+                                {{form_label(form.mobilenumber, 'Mobile Number',{ 'label_attr': {'class': 'control-label'} })}}
+
+                            <div class="controls">
+                                    {{form_widget(form.mobilenumber)}}
+                                <span class="help-inline">{{ form_errors(form.mobilenumber) }}</span>
+                            </div>
+                        </div>
+
+                        <div class="control-group primary">
+                                {{form_label(form.phonenumber, 'Phone Number',{ 'label_attr': {'class': 'control-label'} })}}
+
+                            <div class="controls">
+                                    {{form_widget(form.phonenumber)}}
+                                <span class="help-inline">{{ form_errors(form.phonenumber) }}</span>
+                            </div>
+                        </div>
+
+                        <div class="control-group primary">
+                                {{form_label(form.address, 'Address',{ 'label_attr': {'class': 'control-label'} })}}
+
+                            <div class="controls">
+                                    {{form_widget(form.address)}}
+                                <span class="help-inline">{{ form_errors(form.address) }}</span>
+                            </div>
+                        </div>
+
+                        <div class="control-group primary">
+                                {{form_label(form.city, 'City',{ 'label_attr': {'class': 'control-label'} })}}
+
+                            <div class="controls">
+                                    {{form_widget(form.city)}}
+                                <span class="help-inline">{{ form_errors(form.city) }}</span>
+                            </div>
+                        </div>
+
+                        <div class="control-group primary">
+                                {{form_label(form.country, 'Country',{ 'label_attr': {'class': 'control-label'} })}}
+
+                            <div class="controls">
+                                    {{form_widget(form.country)}}
+                                <span class="help-inline">{{ form_errors(form.country) }}</span>
+                            </div>
+                        </div>
+
+                        <div class="control-group primary">
+                                    {{form_label(form.dateofbirth, 'Date of Birth',{ 'label_attr': {'class': 'control-label'} })}}
+
+                            <div class="controls">
+                                    {{form_widget(form.dateofbirth,{'value':"now"|date("m/d/Y")})}}
+                                <span class="help-inline">{{ form_errors(form.dateofbirth) }}</span>
+                            </div>
+                        </div>
+
+
+                        <div class="control-group primary">
+                                    {{form_label(form.department, 'Department',{ 'label_attr': {'class': 'control-label'} })}}
+
+                            <div class="controls">
+                                    {{form_widget(form.department)}}
+                                <span class="help-inline">{{ form_errors(form.department) }}</span>
+                            </div>
+                        </div>
+
+                        <div class="control-group primary">
+                                    {{form_label(form.batch, 'Batch',{ 'label_attr': {'class': 'control-label'} })}}
+
+                            <div class="controls">
+                                    {{form_widget(form.batch)}}
+                                <span class="help-inline">{{ form_errors(form.batch) }}</span>
+                            </div>
+                        </div>
+
+
+
+                        <div class="control-group primary">
+                                    {{form_label(form.skills, 'Skills',{ 'label_attr': {'class': 'control-label'} })}}
+
+                            <div class="controls">
+                                    {{form_widget(form.skills)}}
+                                <span class="help-inline">{{ form_errors(form.skills) }}</span>
+                            </div>
+                        </div>
+                        <div class="control-group primary">         
+                                {{form_label(form.skills, ' ',{ 'label_attr': {'class': 'control-label'} })}}   
+                            <div class="controls">
+                                 {{form_widget(form.submit,{'label':'Update','attr':{'class':'btn btn-success span4'}})}}                           
+                            </div></div>
+
+                       {{ form_end(form) }}
+
+                    
+
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

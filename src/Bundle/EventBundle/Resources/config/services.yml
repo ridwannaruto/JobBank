@@ -1,0 +1,7 @@
+parameters:
+#    moraspirit_event.example.class: Moraspirit\EventBundle\Example
+
+services:
+#    moraspirit_event.example:
+#        class: %moraspirit_event.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
