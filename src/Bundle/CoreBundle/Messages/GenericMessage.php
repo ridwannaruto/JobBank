@@ -1,6 +1,6 @@
 <?php
 
-namespace Bundle\CoreBundle\Values\Messages;
+namespace Bundle\CoreBundle\Messages;
 
 
 

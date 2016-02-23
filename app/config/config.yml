@@ -34,7 +34,7 @@ twig:
       client_name: %client_name%
       client_logo: "%app_root%/app/Resources/images/%client_logo%"
       client_icon: "%app_root%/app/Resources/images/%client_icon%"
-      app_theme: "/volma/web/bundles/core/css/bootstrap-%app_theme%.css"
+      app_theme: "%app_root%/web/bundles/core/css/bootstrap-%app_theme%.css"
 
 # Assetic Configuration
 assetic:

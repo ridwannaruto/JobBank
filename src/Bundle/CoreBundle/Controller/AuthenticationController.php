@@ -87,7 +87,7 @@ class AuthenticationController extends BaseController
                 return $this->render(TwigTemplate::$TWIG_PERMISSION);
             }
         }
-        return $this->redirect($this->generateUrl(RouteNames::$ROUTE_LOGIN));
+        return $this->redirect($this->generateUrl(RouteName::$ROUTE_LOGIN));
     }
 
     public function deleteConfirmationAction($verificationToken, $userEmail)
@@ -194,8 +194,8 @@ class AuthenticationController extends BaseController
         } catch (\Exception $e) {
             echo "ERROR IN CREATING CONFIRMATION";
         }
-        $activateLink = $this->generateUrl(RouteNames::$ROUTE_EMAIL_VERIFICATION,array($confirmation->getVerification(),$userEmail));
-        $deleteLink = $this->generateUrl(RouteNames::$ROUTE_EMAIL_VERIFICATION_DELETE,array($confirmation->getVerification(),$userEmail));
+        $activateLink = $this->generateUrl(RouteName::$ROUTE_EMAIL_VERIFICATION,array($confirmation->getVerification(),$userEmail));
+        $deleteLink = $this->generateUrl(RouteName::$ROUTE_EMAIL_VERIFICATION_DELETE,array($confirmation->getVerification(),$userEmail));
 
         $message = \Swift_Message::newInstance()
             ->setSubject('Volma Registration')

@@ -2,4 +2,4 @@ _assetic:
     resource: .
     type: assetic
 _app:
-    resource: /var/www/html/volma/app/config/routing_dev.yml
+    resource: 'D:/xampp/htdocs/symfony/JobBank/app/config/routing_dev.yml'
