@@ -31,3 +31,6 @@ bundle_entity:
     resource: "@NewsBundle/Resources/config/routing.yml"
     prefix:   /
 
+bundle_vacancy:
+    resource: "@BundleVacancyBundle/Resources/config/routing.yml"
+    prefix:   /

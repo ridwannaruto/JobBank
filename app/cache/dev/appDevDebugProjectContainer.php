@@ -2957,6 +2957,7 @@ class appDevDebugProjectContainer extends Container
         $instance->addPath('D:\\xampp\\htdocs\\symfony\\JobBank\\src\\Bundle\\TaskBundle/Resources/views', 'Task');
         $instance->addPath('D:\\xampp\\htdocs\\symfony\\JobBank\\src\\Bundle\\ProjectBundle/Resources/views', 'Project');
         $instance->addPath('D:\\xampp\\htdocs\\symfony\\JobBank\\src\\Bundle\\NotificationBundle/Resources/views', 'Notification');
+        $instance->addPath('D:\\xampp\\htdocs\\symfony\\JobBank\\src\\Bundle\\VacancyBundle/Resources/views', 'BundleVacancy');
         $instance->addPath('D:\\xampp\\htdocs\\symfony\\JobBank\\vendor\\symfony\\symfony\\src\\Symfony\\Bundle\\WebProfilerBundle/Resources/views', 'WebProfiler');
         $instance->addPath('D:\\xampp\\htdocs\\symfony\\JobBank\\vendor\\sensio\\distribution-bundle\\Sensio\\Bundle\\DistributionBundle/Resources/views', 'SensioDistribution');
         $instance->addPath('D:/xampp/htdocs/symfony/JobBank/app/Resources/views');
@@ -3431,6 +3432,7 @@ class appDevDebugProjectContainer extends Container
                 'ProjectBundle' => 'Bundle\\ProjectBundle\\ProjectBundle',
                 'NotificationBundle' => 'Bundle\\NotificationBundle\\NotificationBundle',
                 'CommentBundle' => 'Bundle\\CommentBundle\\CommentBundle',
+                'BundleVacancyBundle' => 'Bundle\\VacancyBundle\\BundleVacancyBundle',
                 'WebProfilerBundle' => 'Symfony\\Bundle\\WebProfilerBundle\\WebProfilerBundle',
                 'SensioDistributionBundle' => 'Sensio\\Bundle\\DistributionBundle\\SensioDistributionBundle',
                 'SensioGeneratorBundle' => 'Sensio\\Bundle\\GeneratorBundle\\SensioGeneratorBundle',

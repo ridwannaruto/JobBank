@@ -67,6 +67,7 @@ class appDevUrlGenerator extends Symfony\Component\Routing\Generator\UrlGenerato
         'profile_picture' => array (  0 =>   array (  ),  1 =>   array (    '_controller' => 'Bundle\\UserBundle\\Controller\\UserProfileController::updatePictureAction',  ),  2 =>   array (  ),  3 =>   array (    0 =>     array (      0 => 'text',      1 => '/profilepicture',    ),  ),  4 =>   array (  ),),
         'volunteer_list' => array (  0 =>   array (  ),  1 =>   array (    '_controller' => 'Bundle\\UserBundle\\Controller\\UserListController::viewListAction',  ),  2 =>   array (  ),  3 =>   array (    0 =>     array (      0 => 'text',      1 => '/volunteer/list',    ),  ),  4 =>   array (  ),),
         'department' => array (  0 =>   array (    0 => 'pillarName',  ),  1 =>   array (    '_controller' => 'UserBundle:Department:detail',  ),  2 =>   array (  ),  3 =>   array (    0 =>     array (      0 => 'variable',      1 => '/',      2 => '[^/]++',      3 => 'pillarName',    ),    1 =>     array (      0 => 'text',      1 => '/pillar',    ),  ),  4 =>   array (  ),),
+        'bundle_vacancy_homepage' => array (  0 =>   array (    0 => 'name',  ),  1 =>   array (    '_controller' => 'Bundle\\VacancyBundle\\Controller\\DefaultController::indexAction',  ),  2 =>   array (  ),  3 =>   array (    0 =>     array (      0 => 'variable',      1 => '/',      2 => '[^/]++',      3 => 'name',    ),    1 =>     array (      0 => 'text',      1 => '/hello',    ),  ),  4 =>   array (  ),),
     );
 
     /**

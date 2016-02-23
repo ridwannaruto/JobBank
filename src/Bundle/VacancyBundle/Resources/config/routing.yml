@@ -1,0 +1,3 @@
+bundle_vacancy_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: BundleVacancyBundle:Default:index }

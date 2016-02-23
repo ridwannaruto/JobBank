@@ -7,7 +7,7 @@ use Bundle\CoreBundle\Entity\Confirmation;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Bundle\CoreBundle\Values\RepositoryName;
 
-abstract class BaseController extends Controller{
+abstract class BaseController extends Controller {
 
     /* Session attribute Keys */
     protected $SESSION_KEY_USER_ID = "user_id";
@@ -29,11 +29,8 @@ abstract class BaseController extends Controller{
     protected $KEY_NOTIFICATION_LIST = 'notificationList';
     protected $KEY_TASK_LIST = 'taskList';
 
-
-
     /* Default Values */
     protected $DEFAULT_PHOTO_PATH ='/web/bundles/User/Photo/default.jpg';
-
 
     /* User Roles */
     protected $USER_ROLE_ADMIN = 'Admin';
@@ -45,14 +42,12 @@ abstract class BaseController extends Controller{
     protected $STATUS_USER_VERIFIED = 1;
     protected $STATUS_USER_ACTIVE = 2;
 
-
-    protected function getEntityManager(){
+    protected function getEntityManager() {
         return $this->getDoctrine()->getManager();
     }
 
-
     protected function authenticateUser() {
-        $session = $this->getRequest()->getSession();
+        $session = $this->get('session');
         $repository = $this->getEntityManager()->getRepository(RepositoryName::$REPOSITORY_USER);
         $id = $session->get($this->SESSION_KEY_USER_ID);
         $user = $repository->findOneBy(array($this->KEY_ID => $id));
@@ -63,15 +58,16 @@ abstract class BaseController extends Controller{
         }
     }
 
-    protected function findEntityById($repositoryName,$entityId){
+    protected function findEntityById($repositoryName,$entityId) {
         return $this->getEntityManager()->getRepository($repositoryName)->find($entityId);
     }
-    protected function findOneEntity($repositoryName,$searchParams){
+
+    protected function findOneEntity($repositoryName,$searchParams) {
         $repository = $this->getEntityManager()->getRepository($repositoryName);
         return $repository->findOneBy($searchParams);
     }
 
-    protected function findUniqueEntities($repositoryName,$searchParams){
+    protected function findUniqueEntities($repositoryName,$searchParams) {
         $repository = $this->getEntityManager()->getRepository($repositoryName);
         return $repository->findBy($searchParams);
     }
@@ -105,6 +101,4 @@ abstract class BaseController extends Controller{
             ->getQuery();
         return $notificationQuery->getResult();
     }
-
-
 }

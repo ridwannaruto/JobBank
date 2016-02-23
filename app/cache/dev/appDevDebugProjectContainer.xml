@@ -24,6 +24,7 @@
       <parameter key="ProjectBundle">Bundle\ProjectBundle\ProjectBundle</parameter>
       <parameter key="NotificationBundle">Bundle\NotificationBundle\NotificationBundle</parameter>
       <parameter key="CommentBundle">Bundle\CommentBundle\CommentBundle</parameter>
+      <parameter key="BundleVacancyBundle">Bundle\VacancyBundle\BundleVacancyBundle</parameter>
       <parameter key="WebProfilerBundle">Symfony\Bundle\WebProfilerBundle\WebProfilerBundle</parameter>
       <parameter key="SensioDistributionBundle">Sensio\Bundle\DistributionBundle\SensioDistributionBundle</parameter>
       <parameter key="SensioGeneratorBundle">Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle</parameter>
@@ -2920,6 +2921,10 @@
       <call method="addPath">
         <argument>D:\xampp\htdocs\symfony\JobBank\src\Bundle\NotificationBundle/Resources/views</argument>
         <argument>Notification</argument>
+      </call>
+      <call method="addPath">
+        <argument>D:\xampp\htdocs\symfony\JobBank\src\Bundle\VacancyBundle/Resources/views</argument>
+        <argument>BundleVacancy</argument>
       </call>
       <call method="addPath">
         <argument>D:\xampp\htdocs\symfony\JobBank\vendor\symfony\symfony\src\Symfony\Bundle\WebProfilerBundle/Resources/views</argument>
