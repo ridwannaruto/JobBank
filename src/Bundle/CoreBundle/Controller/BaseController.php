@@ -47,7 +47,7 @@ abstract class BaseController extends Controller {
     }
 
     protected function authenticateUser() {
-        $session = $this->get('session');
+        $session = $this->getRequest()->getSession();
         $repository = $this->getEntityManager()->getRepository(RepositoryName::$REPOSITORY_USER);
         $id = $session->get($this->SESSION_KEY_USER_ID);
         $user = $repository->findOneBy(array($this->KEY_ID => $id));
