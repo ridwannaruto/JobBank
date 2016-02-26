@@ -5,22 +5,21 @@ parameters:
     database_port: null
     database_name: jobbank
     database_user: root
-    database_password:
+    database_password: null
     mailer_transport: smtp
     mailer_host: smtp.gmail.com
     mailer_user: nvssrilanka@gmail.com
     mailer_password: national98765
     locale: en
-    secret: MoraSpirit123#
+    secret: 'MoraSpirit123#'
     client_name: Audinary
     app_version: 2.0.1
-    app_root: http://localhost/symfony/JobBank
+    app_root: 'http://localhost/symfony/JobBank'
     copy_right_year: 2015
-    client_icon: icon.png #/app/Resources/images/
+    client_icon: icon.png
     client_favicon: favicon.ico
     client_logo: logo.png
-    app_theme: redy #{cerulean, classic, cyborg, journal, redy, simplex, slate, spacelab, united}
-    #Email Configurations
+    app_theme: redy
     email_send: moraspirit@gmail.com
-    email_cc:
+    email_cc: null
     email_bcc: rshariffdeen@gmail.com

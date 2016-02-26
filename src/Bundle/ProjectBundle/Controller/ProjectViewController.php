@@ -47,7 +47,7 @@ class ProjectViewController extends BaseProjectController {
             $commentList = $this->getCommentList($projectId);
             $memberList = $this->getMemberList($project);
             $taskList = $this->getTaskList($project);
-            $projectManager = $this->getUser($project->getManager());
+            $projectManager = $this->getUserEntity($project->getManager());
             return $this->render(TwigTemplate::$TWIG_PROJECT_DETAIL, array(
                         'Tasks' => $taskList,
                         'Comments' => $commentList,
@@ -77,8 +77,8 @@ class ProjectViewController extends BaseProjectController {
         $taskDetailList = array();
         if ($taskList != null) {
             foreach ($taskList as $task) {
-                $projectManagerName = $this->getUser($task->getLeader())->getFirstName();
-                $projectAssigneeName = $this->getUser($task->getUser())->getFirstName();
+                $projectManagerName = $this->getUserEntity($task->getLeader())->getFirstName();
+                $projectAssigneeName = $this->getUserEntity($task->getUser())->getFirstName();
                 $taskDetailList[] = array($task->getId(), $task->getCompleted(), $task->getName(), $task->getType(),$task->getUser(), $projectAssigneeName, $task->getLeader(), $projectManagerName);
             }
             return $taskDetailList;
@@ -93,7 +93,7 @@ class ProjectViewController extends BaseProjectController {
         $MembersDetails = array();
         if ($Members != null) {
             foreach ($Members as $memberId) {
-                $member = $this->getUser($memberId);
+                $member = $this->getUserEntity($memberId);
                 $MembersDetails[] = array($member->getId(), $member->getFirstname() . " " . $member->getLastname(), $member->getPillar(), $member->getPath());
             }
             return $MembersDetails;

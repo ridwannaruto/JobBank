@@ -51,7 +51,7 @@ class ProjectUpdateController extends BaseProjectController {
         $authenticatedUser = $this->authenticateUser();
         if ($authenticatedUser) {
             $project = $this->findEntityById(RepositoryName::$REPOSITORY_PROJECT,$projectId);
-            $projectManager = $this->getUser($project->getManager());
+            $projectManager = $this->getUserEntity($project->getManager());
             $notificationList = $this->getNotificationList($authenticatedUser->getId());
             $accessLevel = $authenticatedUser->getAccesslevel();
             if ($accessLevel == $this->USER_ROLE_ADMIN || $accessLevel == $this->USER_ROLE_HEAD || $authenticatedUser == $projectManager) {

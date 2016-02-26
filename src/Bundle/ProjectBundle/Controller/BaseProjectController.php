@@ -29,7 +29,7 @@ abstract class BaseProjectController extends BaseController{
     }
 
 
-    protected function getUser($userId) {
+    public function getUserEntity($userId) {
         return $this->findEntityById(RepositoryName::$REPOSITORY_USER,$userId);
     }
 
