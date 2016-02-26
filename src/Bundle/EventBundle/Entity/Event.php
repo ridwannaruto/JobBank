@@ -1,6 +1,6 @@
 <?php
 
-namespace Moraspirit\EntityBundle\Entity;
+namespace Bundle\EventBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 

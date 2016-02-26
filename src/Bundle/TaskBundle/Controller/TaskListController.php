@@ -23,13 +23,13 @@ class TaskListController extends BaseTaskController
         if ($authenticatedUser) {
             $userRole = $authenticatedUser->getAccessLevel();
             $department = $authenticatedUser->getPillar();
-            $entityManager = $this->getEntityManager();
+            $em = $this->getEntityManager();
             $notificationList = $this->getNotificationList($authenticatedUser->getId());
             if ($userRole == $this->USER_ROLE_ADMIN) {
-                $completeTaskQuery = $entityManager->createQuery(
+                $completeTaskQuery = $em->createQuery(
                     'SELECT t.id,t.user,t.name as taskname,t.pillar, t.description, t.project, p.name as projectname, u.firstname, u.lastname FROM Bundle\UserBundle\Entity\User u,Bundle\TaskBundle\Entity\Task t, Bundle\ProjectBundle\Entity\Project p WHERE  t.user = u.id AND t.project = p.id AND t.completed=1'
                 );
-                $incompleteTaskQuery = $entityManager->createQuery(
+                $incompleteTaskQuery = $em->createQuery(
                     'SELECT t.id,t.user,t.name as taskname,t.pillar, t.description, t.project, p.name as projectname, u.firstname, u.lastname FROM Bundle\UserBundle\Entity\User u,Bundle\TaskBundle\Entity\Task t, Bundle\ProjectBundle\Entity\Project p WHERE  t.user = u.id AND t.project = p.id AND t.completed=0'
                 );
                 $completedTaskList = $completeTaskQuery->getResult();
@@ -49,7 +49,7 @@ class TaskListController extends BaseTaskController
                 $completeTaskQuery = $em->createQuery(
                     'SELECT t.id,t.user,t.name as taskname,t.pillar, t.description, t.project, p.name as projectname, u.firstname, u.lastname FROM Bundle\UserBundle\Entity\User u,Bundle\TaskBundle\Entity\Task t, Bundle\ProjectBundle\Entity\Project p WHERE  t.user = u.id AND t.project = p.id AND t.completed=1 AND t.pillar=:pillar ORDER by t.id DESC'
                 )->setParameter('pillar', $department);
-                $incompleteTaskQuery = $entityManager->createQuery(
+                $incompleteTaskQuery = $em->createQuery(
                     'SELECT t.id,t.user,t.name as taskname,t.pillar, t.description, t.project, p.name as projectname, u.firstname, u.lastname FROM Bundle\UserBundle\Entity\User u,Bundle\TaskBundle\Entity\Task t, Bundle\ProjectBundle\Entity\Project p WHERE  t.user = u.id AND t.project = p.id AND t.completed=0 AND t.pillar=:pillar ORDER by t.id DESC'
                 )->setParameter('pillar', $department);
 
@@ -69,7 +69,7 @@ class TaskListController extends BaseTaskController
                 $completeTaskQuery = $em->createQuery(
                     'SELECT t.id,t.user,t.name as taskname,t.pillar, t.description, t.project, p.name as projectname, u.firstname, u.lastname FROM Bundle\UserBundle\Entity\User u,Bundle\TaskBundle\Entity\Task t, Bundle\ProjectBundle\Entity\Project p WHERE  t.user = u.id AND t.project = p.id AND t.completed=1 AND t.user=:userID ORDER by t.id DESC'
                 )->setParameter('userID', $authenticatedUser->getId());
-                $incompleteTaskQuery = $entityManager->createQuery(
+                $incompleteTaskQuery = $em->createQuery(
                     'SELECT t.id,t.user,t.name as taskname,t.pillar, t.description, t.project, p.name as projectname, u.firstname, u.lastname FROM Bundle\UserBundle\Entity\User u,Bundle\TaskBundle\Entity\Task t, Bundle\ProjectBundle\Entity\Project p WHERE  t.user = u.id AND t.project = p.id AND t.completed=0 AND t.user=:userID ORDER by t.id DESC'
                 )->setParameter('userID', $authenticatedUser->getId());
 

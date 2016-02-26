@@ -1,6 +1,6 @@
 <?php
 
-namespace Bundle\CoreBundle\Entity\Authentication;
+namespace Bundle\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 

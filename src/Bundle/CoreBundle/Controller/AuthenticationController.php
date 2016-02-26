@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Bundle\UserBundle\Entity\User;
 use Bundle\UserBundle\Entity\TrackReport;
 use Bundle\UserBundle\Form\UserType;
-use Bundle\CoreBundle\Entity\Authentication\Confirmation;
+use Bundle\CoreBundle\Entity\Confirmation;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Bundle\CoreBundle\Values\RepositoryName;
 use Bundle\CoreBundle\Values\RouteName;
