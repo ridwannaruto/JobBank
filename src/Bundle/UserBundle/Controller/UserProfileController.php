@@ -50,7 +50,8 @@ class UserProfileController extends BaseUserController
             }
 
             return $this->render(TwigTemplate::$TWIG_USER_PHOTO_UPDATE, array(
-                'user' => $authenticatedUser, 'form' => $photoUploadForm->createView(),
+                'user' => $authenticatedUser,
+                'form' => $photoUploadForm->createView(),
                 $this->KEY_NOTIFICATION_LIST => $notificationList
             )
             );

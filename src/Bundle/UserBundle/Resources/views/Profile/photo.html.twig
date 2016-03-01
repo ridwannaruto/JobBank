@@ -23,27 +23,23 @@
                             <div class="box span6 center">
                                 
 					<div class="box-header well">
-                                            
 						<h2> Upload Photo</h2>
-						
 					</div>
+
 					<div class="box-content span12 center">
-						
-                                       
-					
-                                                <div class="propic" >
-                                            <img src="{{user.path}}" width="300" height="300"></h2>
-                                                </div> <br>
-                                                <form action="{{ path('profile_picture') }}" method="post" {{ form_enctype(form) }}>
-                                                    please upload a high quality photo in the resolution of 400 x 400<br>
-                                                    {{ form_widget(form) }}
-                                                    <br>
-                                                   <input type="submit" class='btn btn-success' value="Update" />
-                                                   
-                                                </form>         
-                                               
-                                           
-				
+						<div class="propic" >
+							{% if (user.path) %}
+								<img src="{{ asset(user.path) }}" width="300" height="300">
+							{% else %}
+								<img src="{{ asset("bundles/core/img/default_user.jpg") }}" width="300" height="300">
+							{% endif %}
+						</div> <br>
+						<form action="{{ path('profile_picture') }}" method="post" {{ form_enctype(form) }}>
+							please upload a high quality photo in the resolution of 400 x 400<br>
+							{{ form_widget(form) }}
+							<br>
+						   <input type="submit" class='btn btn-success' value="Update" />
+						</form>
 					</div>
 				</div>
 				

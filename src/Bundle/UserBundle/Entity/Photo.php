@@ -76,14 +76,14 @@ class Photo
     {
         // the absolute directory path where uploaded
         // documents should be saved
-        return '/home/morasp5/public_html/volma'.$this->getUploadDir();
+        return __DIR__.'/../../../../web/' . $this->getUploadDir();
     }
 
     protected function getUploadDir()
     {
         // get rid of the __DIR__ so it doesn't screw up
         // when displaying uploaded doc/image in the view.
-        return '/web/bundles/User/uploads/photo'.$this->getId();
+        return 'uploads/photos/' . $this->getId();
     }
     public function setId($id){
         $this->id=$id;
@@ -96,26 +96,26 @@ class Photo
     }
 
     public function upload()
-{
-    // the file property can be empty if the field is not required
-    if (null === $this->getFile()) {
-        return;
+    {
+        // the file property can be empty if the field is not required
+        if (null === $this->getFile()) {
+            return;
+        }
+
+        // use the original file name here but you should
+        // sanitize it at least to avoid any security issues
+
+        // move takes the target directory and then the
+        // target filename to move to
+        $this->getFile()->move(
+            $this->getUploadRootDir(),
+            $this->getFile()->getClientOriginalName()
+        );
+
+        // set the path property to the filename where you've saved the file
+        $this->path = $this->getFile()->getClientOriginalName();
+
+        // clean up the file property as you won't need it anymore
+        $this->file = null;
     }
-
-    // use the original file name here but you should
-    // sanitize it at least to avoid any security issues
-
-    // move takes the target directory and then the
-    // target filename to move to
-    $this->getFile()->move(
-        $this->getUploadRootDir(),
-        $this->getFile()->getClientOriginalName()
-    );
-
-    // set the path property to the filename where you've saved the file
-    $this->path = $this->getFile()->getClientOriginalName();
-
-    // clean up the file property as you won't need it anymore
-    $this->file = null;
-}
 }

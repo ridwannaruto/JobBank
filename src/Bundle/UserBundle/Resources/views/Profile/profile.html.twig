@@ -22,9 +22,9 @@
              
            <p align="center">
                         {% if user.path != null %}
-                        <img src="{{user.path}}" width="300px" height="300px" style="border: 2px">
+                            <img src="{{ asset(user.path) }}" width="300px" height="300px" style="border: 2px">
                         {% else %}
-                        <img src="/web/bundles/User/Photo/default.jpg" width="300px" height="300px" style="border: 2px">
+                            <img src="{{ asset("bundles/core/img/default_user.jpg") }}" width="300px" height="300px" style="border: 2px">
                         {% endif%}
            </p>
         </div>
