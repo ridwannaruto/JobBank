@@ -15,20 +15,11 @@
                     <hr>
 
                     <div style="margin-left: 10%">
-
-                        {%  if app.session.get('photo') %}
-                            <img class = "pull-right" src="{{ asset(app.session.get('photo')) }}" width="100px" height="100px" style="border: 2px">
-                        {%  else  %}
-                            <img class = "pull-right" src="{{ asset('bundles/core/img/default_user.jpg') }}" width="150px" height="150px" style="border: 2px">
-                        {%  endif %}
-
-
+                        <img class = "pull-right" src="{{ asset(app.session.get('photo')) }}" width="100px" height="100px" style="border: 2px">
                         <h3>{{ app.session.get('full_name') }}</h3><br>
                         <h5>Department</h5>
                         <h3>{{ app.session.get('department') }}</h3><br>
                         <br>
-
-
                     </div>
 
                 </div>

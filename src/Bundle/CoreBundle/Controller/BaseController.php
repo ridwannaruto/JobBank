@@ -15,7 +15,7 @@ abstract class BaseController extends Controller {
     protected $SESSION_KEY_FULL_NAME = "full_name";
     protected $SESSION_KEY_FIRST_NAME = "first_name";
     protected $SESSION_KEY_ACCESS_LEVEL = "access_level";
-    protected $SESSION_KEY_PHOTO = "photo_path";
+    protected $SESSION_KEY_PHOTO = "photo";
     protected $SESSION_KEY_DEPARTMENT = "department";
 
     /* Reference attribute Keys */
@@ -30,7 +30,7 @@ abstract class BaseController extends Controller {
     protected $KEY_TASK_LIST = 'taskList';
 
     /* Default Values */
-    protected $DEFAULT_PHOTO_PATH ='/web/bundles/User/Photo/default.jpg';
+    protected $DEFAULT_PHOTO_PATH ='bundles/core/img/default_user.jpg';
 
     /* User Roles */
     protected $USER_ROLE_ADMIN = 'Admin';
