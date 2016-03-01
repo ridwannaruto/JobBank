@@ -194,8 +194,14 @@ class AuthenticationController extends BaseController
         } catch (\Exception $e) {
             echo "ERROR IN CREATING CONFIRMATION";
         }
-        $activateLink = $this->generateUrl(RouteName::$ROUTE_EMAIL_VERIFICATION,array($confirmation->getVerification(),$userEmail));
-        $deleteLink = $this->generateUrl(RouteName::$ROUTE_EMAIL_VERIFICATION_DELETE,array($confirmation->getVerification(),$userEmail));
+        $activateLink = $this->generateUrl(RouteName::$ROUTE_EMAIL_VERIFICATION, array(
+            'verification' => $confirmation->getVerification(),
+            'email' => $userEmail
+        ));
+        $deleteLink = $this->generateUrl(RouteName::$ROUTE_EMAIL_VERIFICATION_DELETE, array(
+            'verification' => $confirmation->getVerification(),
+            'email' => $userEmail
+        ));
 
         $message = \Swift_Message::newInstance()
             ->setSubject('Volma Registration')
@@ -204,7 +210,7 @@ class AuthenticationController extends BaseController
             ->setBcc('gayan@moraspirit.com', 'rshariffdeen@gmail.com')
             ->setBody(
                 $this->renderView(
-                    'MoraspiritNotificationBundle:Register:confirm.html.twig',
+                    'NotificationBundle:Register:confirm.html.twig',
                     array('name' => $userFirstName, 'delete' => $deleteLink, 'activate' => $activateLink)
                 ), 'text/html'
             );

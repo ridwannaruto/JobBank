@@ -13,7 +13,7 @@ parameters:
     secret:            'MoraSpirit123#'
     client_name:       Audinary
     app_version:       2.0.1
-    app_root:          'http://localhost/symfony/JobBank'
+    app_root:          'http://localhost/JobBank'
     copy_right_year:   2015
     client_icon:       icon.png
     client_favicon:    favicon.ico

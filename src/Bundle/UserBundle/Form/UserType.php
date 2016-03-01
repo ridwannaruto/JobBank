@@ -43,6 +43,8 @@ class UserType extends AbstractType {
                     'attr' => array(
                         'placeholder' => 'date',
                         'class' => 'input-large datepicker',
+                        'data-provide' => 'datepicker',
+                        'data-format' => 'yyyy-mm-dd',
                         'data' => \Date('today'),
                     )
                 ))
