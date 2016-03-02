@@ -38,6 +38,7 @@ namespace Bundle\CoreBundle\Values;
      public static $TWIG_USER_PROFILE = 'UserBundle:Profile:profile.html.twig';
      public static $TWIG_USER_PROFILE_EDIT =  'UserBundle:Profile:edit.html.twig';
      public static $TWIG_USER_PHOTO_UPDATE = 'UserBundle:Profile:photo.html.twig';
+     public static $TWIG_USER_CV_UPDATE = 'UserBundle:Profile:cv.html.twig';
      public static $TWIG_USER_CHANGE_PASSWORD = 'UserBundle:Account:changePassword.html.twig';
      public static $TWIG_USER_RESET_PASSWORD = 'UserBundle:Account:resetPassword.html.twig';
      public static $TWIG_USER_FORGOT_PASSWORD = 'UserBundle:Account:forgotPassword.html.twig';

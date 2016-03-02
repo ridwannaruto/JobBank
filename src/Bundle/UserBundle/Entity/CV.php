@@ -2,6 +2,9 @@
 
 namespace Bundle\UserBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class CV
 {
@@ -11,11 +14,6 @@ class CV
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     public $id;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank
-     */
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)

@@ -4,83 +4,80 @@
 {% block content %}
 <div class="container-fluid">
     <div class="row-fluid">
-
         <noscript>
-        <div class="alert alert-block span12">
-            <h4 class="alert-heading">Warning!</h4>
-            <p>You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a> enabled to use this site.</p>
-        </div>
+            <div class="alert alert-block span12">
+                <h4 class="alert-heading">Warning!</h4>
+                <p>You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a> enabled to use this site.</p>
+            </div>
         </noscript>
-         <div id="content" class="span10 ">
-			<!-- content starts -->
-			
-                        <div class="row-fluid">
-      
-<div class="box span4">                                
-        
-        <div class="box-content ">
-             
-           <p align="center">
-                        {% if user.photopath != null %}
-                            <img src="{{ asset(user.photopath) }}" width="300px" height="300px" style="border: 2px">
-                        {% else %}
-                            <img src="{{ asset("bundles/core/img/default_user.jpg") }}" width="300px" height="300px" style="border: 2px">
-                        {% endif%}
-           </p>
-        </div>
+<div id="content" class="span10 ">
+<!-- content starts -->
+
+            <div class="row-fluid">
+
+<div class="box span4">
+    <div class="box-content ">
+        <p align="center">
+            {% if user.photopath != null %}
+                <img src="{{ asset(user.photopath) }}" width="300px" height="300px" style="border: 2px">
+            {% else %}
+                <img src="{{ asset("bundles/core/img/default_user.jpg") }}" width="300px" height="300px" style="border: 2px">
+            {% endif%}
+        </p>
     </div>
-                           
-   
-<div class="box span8">                                
-        
+</div>
+
+
+<div class="box span8">
         <div class="box-content ">
             <div id="content" class="span12">
-               
-                {% if (app.session.get('user_id')) == user.id%}
-                    <div class="pull-right"> 
-                        <a href="{{path('profile_edit')}} "><button  class="btn btn-small btn-account">edit user_profile</button></a>
-                         <a href="{{path('profile_picture')}} "><button  class="btn btn-small btn-account">change user_profile picture</button></a>
-                        
-                         
+                <div class="pull-left">
+                    <a href="{{ asset(user.cvpath) }}" target="_blank"><button  class="btn btn-small btn-account" {% if user.cvpath == null %}disabled{% endif %}>View CV</button></a>
+                </div>
+                {% if (app.session.get('user_id')) == user.id %}
+                    <div class="pull-right">
+                        <a href="{{ path('profile_edit') }}"><button  class="btn btn-small btn-account">Edit User Profile</button></a>
+                        <a href="{{ path('profile_picture') }}"><button  class="btn btn-small btn-account">Change User Profile Picture</button></a>
+                        <a href="{{ path('cv') }}"><button  class="btn btn-small btn-account">Change CV</button></a>
                     </div>
                 {% endif %}
-                {% if user.accesslevel == 'Head'  %}   
+                {% if user.accesslevel == 'Head'  %}
              <h2 align="center">Pillar Head</h2><br>
-             {% elseif user.accesslevel == 'Admin' %}  
+             {% elseif user.accesslevel == 'Admin' %}
              <h2 align="center">CXO</h2><br><br>
                     {% endif %}
-             
-             {% if user.accesslevel != 'Head' and user.accesslevel != 'Admin' %}   
+
+             {% if user.accesslevel != 'Head' and user.accesslevel != 'Admin' %}
              <br><br>
              {% endif %}
                 <table>
-                    
-                    
+
+
                     <tr>
-                        
+
                         <td width="40%">
-                            
+
                     <p align="right">
                         <strong>Full Name</strong>: <br>
                          <strong>Gender</strong>: <br>
                           <strong>Batch</strong>: <br>
                            <strong>Department</strong>: <br>
                            <strong>NIC</strong>: <br>
-                           
+
                            <br>
                            <strong>Address</strong>:<br>
                            <strong>City</strong>:<br>
                            <strong>Country</strong>:<br>
                            <strong>Email</strong>:<br>
                            <strong>Mobile Number</strong>:<br>
-                           <strong>Phone Number</strong>:<br>                          
-                           {% if user.accesslevel != 'Admin' %}  
+                           <strong>Phone Number</strong>:<br>
+                           {% if user.accesslevel != 'Admin' %}
                             <strong>Pillar</strong><br><br>
                             {% endif %}
-                            {% if user.accesslevel == 'Admin' %}  
+                            {% if user.accesslevel == 'Admin' %}
                             <br>
                             {% endif %}
-                             {% if user.accesslevel != 'Head' and user.accesslevel != 'Admin' %}    
+                             {% if user.accesslevel != 'Head' and user.accesslevel != 'Admin' %}
                             <strong>Rating</strong><br>
                             {% endif %}
                     </p>
@@ -88,7 +85,7 @@
                         <td width="1%">
                         </td>
                             <td width="40%">
-                                
+
                     <p align="left">
                         {{user.firstname}} {{user.lastname}}<br>
                        {% if user.gender == 'M' %}
@@ -101,7 +98,7 @@
                          {{user.department}}<br>
                          {{user.nic}}<br>
                         <br>
-                    
+
                           {{user.address}}<br>
                           {{user.city}} <br>
                           {{user.country}} <br>
@@ -111,29 +108,29 @@
                         null
                         {% else %}
                         {{user.phonenumber}}
-                        {% endif %}<br>     
-                           
-                           {% if user.accesslevel != 'Admin' %}  
-                        <span class="label label-inverse">{{user.pillar}}</span> <br><br>  
+                        {% endif %}<br>
+
+                           {% if user.accesslevel != 'Admin' %}
+                        <span class="label label-inverse">{{user.pillar}}</span> <br><br>
                              {% endif %}
-                         
-                          {% if user.accesslevel == 'Admin' %}  
+
+                          {% if user.accesslevel == 'Admin' %}
                             <br>
                             {% endif %}
-                             {% if user.accesslevel != 'Head' and user.accesslevel != 'Admin' %}   
+                             {% if user.accesslevel != 'Head' and user.accesslevel != 'Admin' %}
                           <span class="label label-important">{{rating}}</span><br>
                            {% endif %}
                          </p>
                         </td>
                          <td width="3%">
                         </td>
-                        
-                       
+
+
                 </tr>
                 </table>
-                
-              
-                
+
+
+
             </div>
         </div>
     </div>

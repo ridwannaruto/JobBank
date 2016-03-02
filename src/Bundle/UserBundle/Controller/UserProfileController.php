@@ -14,8 +14,6 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 class UserProfileController extends BaseUserController
 {
-
-
     public function updatePictureAction(Request $request)
     {
         $authenticatedUser = $this->authenticateUser();

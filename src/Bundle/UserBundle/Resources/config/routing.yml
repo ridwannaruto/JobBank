@@ -22,6 +22,10 @@ profile_picture:
     pattern:  /profilepicture
     defaults: { _controller: UserBundle:UserProfile:updatePicture }
 
+cv:
+    pattern:  /cv
+    defaults: { _controller: UserBundle:UserCV:updateCV }
+
 volunteer_list:
     pattern:  /volunteer/list
     defaults: { _controller: UserBundle:UserList:viewList }
