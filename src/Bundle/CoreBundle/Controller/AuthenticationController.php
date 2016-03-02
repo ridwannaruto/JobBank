@@ -229,8 +229,8 @@ class AuthenticationController extends BaseController
         $session->set($this->SESSION_KEY_ACCESS_LEVEL, $authenticatedUser->getAccesslevel());
         $session->set($this->SESSION_KEY_DEPARTMENT, $authenticatedUser->getPillar());
         $path = $this->DEFAULT_PHOTO_PATH;
-        if ($authenticatedUser->getPath() != null) {
-            $path = $authenticatedUser->getPath();
+        if ($authenticatedUser->getPhotoPath() != null) {
+            $path = $authenticatedUser->getPhotopath();
         }
         $session->set($this->SESSION_KEY_PHOTO, $path);
     }

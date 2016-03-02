@@ -29,7 +29,8 @@
     <field name="batch" type="integer" column="Batch" nullable="false"/>
     <field name="skills" type="array" column="Skills" nullable="false"/>
     <field name="status" type="integer" column="status" nullable="true"/>
-     <field name="path" type="text" column="path" nullable="true"/>
-      <field name="lastlogin" type="datetime" column="lastlogin" nullable="true"/>
+    <field name="photopath" type="text" column="photopath" nullable="true"/>
+    <field name="cvpath" type="text" column="cvpath" nullable="true"/>
+    <field name="lastlogin" type="datetime" column="lastlogin" nullable="true"/>
   </entity>
 </doctrine-mapping>

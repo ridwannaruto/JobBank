@@ -156,15 +156,13 @@
                     <li>
                         <a href="{{path('user_profile',{'userId':member[0]})}}">
                              {% if member[3] != null %}
-                            <img class="dashboard-avatar" alt="Not Found" src="{{member[3]}}">  
-
-                        {% else %}
-                            <img class="dashboard-avatar" alt="Not Found" src="/web/bundles/User/Photo/default.jpg">  
-
-                        {% endif%} 
+                                <img class="dashboard-avatar" alt="Not Found" src="{{ asset(member[3]) }}">
+                            {% else %}
+                                <img class="dashboard-avatar" alt="Not Found" src="{{ asset("bundles/core/img/default_user.jpg") }}">
+                            {% endif%}
                      
                         <strong>{{member[1]}}</strong></a><br>
-                        <span class="label label-inverse">{{member[2]}}</span>  
+                        <span class="label label-inverse">{{member[2]}}</span>
                         <br>
                         <br>
                     </li>
@@ -196,18 +194,16 @@
                     {% for comment in Comments %}
                     <li>
                         <a href="{{path('user_profile',{'userId':comment.user})}}">
-                              {% if comment.path != null %}
-                            <img class="dashboard-avatar" alt="Usman" src="{{comment.path}}">  
-                            
-                        {% else %}
-                            <img class="dashboard-avatar" alt="Usman" src="/web/bundles/User/Photo/default.jpg">  
-
-                        {% endif%} 
+                            {% if comment.photopath != null %}
+                                <img class="dashboard-avatar" alt="Usman" src="{{ asset(comment.photopath) }}">
+                            {% else %}
+                                <img class="dashboard-avatar" alt="Usman" src="{{ asset("bundles/core/img/default_user.jpg") }}">
+                            {% endif%}
              
                         <strong>{{comment.firstname}} {{comment.lastname}}</strong>
                         </a>         
                         {% if comment.user == app.session.get('user_id') %}
-                        <button url="{{ path('comment_delete', { 'commentId': comment.id }) }}" id="{{comment.id}}"type="button" class=" close btn-comment">×</button>
+                        <button url="{{ path('comment_delete', { 'commentId': comment.id }) }}" id="{{comment.id}}" type="button" class=" close btn-comment">×</button>
                         {% endif %} <br> 
                         {{comment.comment}}<br>
                          <span class="pull-right"><h6>{{comment.timestamp | date('Y-m-d H:i:s')}}</h6></span><br>
@@ -216,7 +212,7 @@
                     
                     <li>
                          <a href="{{path('user_profile',{'userId':app.session.get('user_id')})}}">
-                            <img class="dashboard-avatar" alt="Usman" src="{{app.session.get('photo')}}">
+                            <img class="dashboard-avatar" alt="Usman" src="{{ asset(app.session.get('photo')) }}">
                      
                         </a>
                         {{form_start(NewComment)}}

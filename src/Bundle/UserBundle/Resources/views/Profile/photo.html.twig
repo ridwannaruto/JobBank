@@ -28,8 +28,8 @@
 
 					<div class="box-content span12 center">
 						<div class="propic" >
-							{% if (user.path) %}
-								<img src="{{ asset(user.path) }}" width="300" height="300">
+							{% if (user.photopath) %}
+								<img src="{{ asset(user.photopath) }}" width="300" height="300">
 							{% else %}
 								<img src="{{ asset("bundles/core/img/default_user.jpg") }}" width="300" height="300">
 							{% endif %}

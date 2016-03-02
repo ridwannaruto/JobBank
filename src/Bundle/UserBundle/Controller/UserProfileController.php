@@ -2,12 +2,11 @@
 
 namespace Bundle\UserBundle\Controller;
 
-use Bundle\CoreBundle\Values\Messages\GenericMessage;
+use Bundle\CoreBundle\Messages\GenericMessage;
 use Bundle\CoreBundle\Values\RepositoryName;
 use Bundle\CoreBundle\Values\RouteName;
 use Bundle\CoreBundle\Values\TwigTemplate;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Bundle\UserBundle\Entity\Photo;
 use Bundle\UserBundle\Entity\Profile;
 use Bundle\UserBundle\Form\ProfileType;
@@ -36,7 +35,7 @@ class UserProfileController extends BaseUserController
                 } catch (\Exception $e) {
                     echo $e;
                 }
-                $authenticatedUser->setPath($photo->getWebPath());
+                $authenticatedUser->setPhotoPath($photo->getWebPath());
                 $this->saveEntityInstantly($authenticatedUser);
 
                 $request->getSession()->set('photo', $photo->getWebPath());

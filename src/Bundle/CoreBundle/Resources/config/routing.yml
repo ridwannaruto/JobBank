@@ -18,6 +18,10 @@ auth_email_verification:
     pattern:  /activate/{verification}/{email}
     defaults: { _controller: CoreBundle:Authentication:verifyEmail }
 
+user_activate:
+    pattern:  /activate/{userId}
+    defaults: { _controller: CoreBundle:Authentication:activateUser }
+
 auth_delete_confirmation:
     pattern:  /delete/{verification}/{email}
     defaults: { _controller: CoreBundle:Authentication:deleteConfirmation }

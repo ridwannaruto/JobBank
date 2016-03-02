@@ -108,13 +108,6 @@ class User
      * @var integer
      */
     private $id;
-    
-    /**
-     * @var string
-     */
-    private $fullName;
-
-
 
     /**
      * Set username
@@ -593,18 +586,18 @@ class User
         return $this->status;
     }
     
-     private $path;
+     private $photopath;
 
 
     /**
      * Set status
      *
-     * @param boolean $status
+     * @param Status photopath
      * @return User
      */
-    public function setPath($path)
+    public function setPhotopath($photopath)
     {
-        $this->path = $path;
+        $this->photopath = $photopath;
 
         return $this;
     }
@@ -612,11 +605,37 @@ class User
     /**
      * Get confirmed
      *
-     * @return boolean 
+     * @return String
      */
-    public function getPath()
+    public function getPhotopath()
     {
-        return $this->path;
+        return $this->photopath;
+    }
+
+    private $cvpath;
+
+
+    /**
+     * Set status
+     *
+     * @param String cvpath
+     * @return User
+     */
+    public function setCvpath($cvpath)
+    {
+        $this->cvpath = $cvpath;
+
+        return $this;
+    }
+
+    /**
+     * Get confirmed
+     *
+     * @return String
+     */
+    public function getCvpath()
+    {
+        return $this->cvpath;
     }
     
      private $lastlogin;
@@ -625,7 +644,7 @@ class User
     /**
      * Set status
      *
-     * @param boolean $status
+     * @param \DateTime login
      * @return User
      */
      
@@ -639,7 +658,7 @@ class User
     /**
      * Get confirmed
      *
-     * @return boolean 
+     * @return \DateTime
      */
     public function getLastlogin()
     {

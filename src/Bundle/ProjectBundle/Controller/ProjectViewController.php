@@ -2,17 +2,11 @@
 
 namespace Bundle\ProjectBundle\Controller;
 
-use Bundle\CoreBundle\Controller\BaseController;
-use Bundle\CoreBundle\Values\Messages\ProjectMessage;
 use Bundle\CoreBundle\Values\RepositoryName;
 use Bundle\CoreBundle\Values\RouteName;
 use Bundle\CoreBundle\Values\TwigTemplate;
+use Bundle\ProjectBundle\Messages\ProjectMessage;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Bundle\ProjectBundle\Entity\Project;
-use Bundle\TaskBundle\Entity\Task;
-use Bundle\ProjectBundle\Form\ProjectType;
-use Bundle\NotificationBundle\Entity\Notification;
 use Bundle\CommentBundle\Entity\Comment;
 use Bundle\CommentBundle\Form\CommentType;
 
@@ -40,7 +34,7 @@ class ProjectViewController extends BaseProjectController {
             
             if ($project == null){
             	return $this->render(TwigTemplate::$TWIG_ERROR, array(
-            	'message'=> ProjectMessage::$MESSAGE_PROJECT_NOT_FOUND, 
+            	'message'=> ProjectMessage::$MESSAGE_PROJECT_NOT_FOUND,
                  $this->KEY_NOTIFICATION_LIST => $notificationsList));
             }
             
@@ -65,7 +59,7 @@ class ProjectViewController extends BaseProjectController {
 
     private function getCommentList($projectId) {
         $em = $this->getDoctrine()->getManager();
-        $query = $em->createQuery('SELECT c.id,c.user, c.comment, c.project, c.task, c.timestamp, u.firstname, u.lastname, u.path FROM Bundle\UserBundle\Entity\User u,Bundle\CommentBundle\Entity\Comment c WHERE  u.id = c.user AND c.project =:projectId')
+        $query = $em->createQuery('SELECT c.id,c.user, c.comment, c.project, c.task, c.timestamp, u.firstname, u.lastname, u.photopath FROM Bundle\UserBundle\Entity\User u,Bundle\CommentBundle\Entity\Comment c WHERE  u.id = c.user AND c.project =:projectId')
                 ->setParameter($this->KEY_PROJECT_ID, $projectId);
         $comments = $query->getResult();
         return $comments;
@@ -94,7 +88,12 @@ class ProjectViewController extends BaseProjectController {
         if ($Members != null) {
             foreach ($Members as $memberId) {
                 $member = $this->getUserEntity($memberId);
-                $MembersDetails[] = array($member->getId(), $member->getFirstname() . " " . $member->getLastname(), $member->getPillar(), $member->getPath());
+                $MembersDetails[] = array(
+                    $member->getId(),
+                    $member->getFirstname() . " " . $member->getLastname(),
+                    $member->getPillar(),
+                    $member->getPhotopath()
+                );
             }
             return $MembersDetails;
         }

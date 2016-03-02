@@ -30,10 +30,10 @@
                                 {% endif %}
                             </div>
                             <a href="{{path('user_profile',{'userId' :member.id})}}">
-                                {% if member.path == null %}
+                                {% if member.photopath == null %}
                                     <img class="dashboard-avatar" alt="Not Found" src="{{ asset("bundles/core/img/default_user.jpg") }}">
                                 {% else %}
-                                    <img class="dashboard-avatar" alt="Not Found" src="{{ asset(member.path) }}">
+                                    <img class="dashboard-avatar" alt="Not Found" src="{{ asset(member.photopath) }}">
                                 {% endif %}
                                 <strong>Name:</strong> {{member.firstname}} {{member.lastname}}</a>
                             </a><br>
