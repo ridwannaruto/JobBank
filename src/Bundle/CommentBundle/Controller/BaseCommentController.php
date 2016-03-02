@@ -14,7 +14,7 @@ class BaseCommentController extends BaseController {
     protected function setNotification($heading, $message, $type, $subscribers, $project, $task) {
         $em = $this->getDoctrine()->getManager();
         foreach ($subscribers as $subscriber) {
-            if ($subscriber != $this->authenticateAction()->getId()) {
+            if ($subscriber != $this->authenticateUser()->getId()) {
                 $notification = new Notification();
                 $notification->setTask($task);
                 $notification->setHeading($heading);

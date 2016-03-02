@@ -34,8 +34,8 @@ class ProjectViewController extends BaseProjectController {
             
             if ($project == null){
             	return $this->render(TwigTemplate::$TWIG_ERROR, array(
-            	'message'=> ProjectMessage::$MESSAGE_PROJECT_NOT_FOUND,
-                 $this->KEY_NOTIFICATION_LIST => $notificationsList));
+            	    'message'=> ProjectMessage::$MESSAGE_PROJECT_NOT_FOUND,
+                    $this->KEY_NOTIFICATION_LIST => $notificationsList));
             }
             
             $commentList = $this->getCommentList($projectId);

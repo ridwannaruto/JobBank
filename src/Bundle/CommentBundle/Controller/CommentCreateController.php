@@ -33,11 +33,11 @@ class CommentCreateController extends BaseCommentController {
             $comment->setUser($commentUserId);
             $comment->setTimestamp(new \DateTime());
 
-            if ($comment->getTask() == 0) {
+            if ($comment->getTask() == null) {
                return $this->setProjectNotification($comment,$commentUserName);
             }
 
-            if ($comment->getProject() == 0) {
+            if ($comment->getProject() == null) {
                return $this->setTaskNotification($comment,$commentUserName);
             }
 
@@ -96,7 +96,7 @@ class CommentCreateController extends BaseCommentController {
         $projectId = $comment->getProject();
         $taskId = $comment->getTask();
 
-        $project = $this->findEntityById(RepositoryName::$REPOSITORY_PROJECT,$projectId);
+        $project = $this->findEntityById(RepositoryName::$REPOSITORY_PROJECT, $projectId);
         $commentList = $project->getComments();
         $commentList[] = $comment->getId();
         $subscriberList = $project->getSubscribers();
