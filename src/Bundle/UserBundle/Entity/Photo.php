@@ -83,7 +83,7 @@ class Photo
     {
         // get rid of the __DIR__ so it doesn't screw up
         // when displaying uploaded doc/image in the view.
-        return 'uploads/photos/' . $this->getId();
+        return 'uploads/user/photos/' . $this->getId();
     }
     public function setId($id){
         $this->id=$id;

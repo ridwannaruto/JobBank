@@ -27,6 +27,15 @@
                 </div>
 
                 <div class="control-group primary">
+                    {{ form_label(form.file, 'Image to be displayed',{ 'label_attr': {'class': 'control-label'} } ) }}
+
+                    <div class="controls">
+                        {{ form_widget(form.file) }}
+                        <span class="help-inline">{{ form_errors(form.file) }}</span>
+                    </div>
+                </div>
+
+                <div class="control-group primary">
                     {{ form_label(form.organizationname, 'Name of the Organization',{ 'label_attr': {'class': 'control-label'} } ) }}
 
                     <div class="controls">

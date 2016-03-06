@@ -33,6 +33,13 @@ class VacancyCreateController extends BaseVacancyController
                     $newVacancy->setPostedbyuserid($loggedUser);
 
                     try {
+                        $newVacancy->upload();
+                    } catch (\Exception $e) {
+                        echo $e;
+                    }
+                    $newVacancy->setImagepath($newVacancy->getWebPath());
+
+                    try {
                         $this->saveEntityInstantly($newVacancy);
                     } catch (\Exception $e) {
                         return $this->render(TwigTemplate::$TWIG_VACANCY_NEW, array(

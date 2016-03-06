@@ -21,6 +21,7 @@ class VacancyType extends AbstractType {
                         'class' => 'span8'
                     )
                 ))
+                ->add('file', 'file')
                 ->add('organizationname')
                 ->add('availableposition')
                 ->add('noofvacancies', 'integer', array(

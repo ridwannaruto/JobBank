@@ -15,6 +15,7 @@ class RepositoryName  {
     public static $REPOSITORY_COMMENT = 'CommentBundle:Comment';
     public static $REPOSITORY_TRACK_REPORT = 'UserBundle:TrackReport';
     public static $REPOSITORY_EVENT = 'EventBundle:Event';
+    public static $REPOSITORY_VACANCY = 'VacancyBundle:Vacancy';
 
 
 }
