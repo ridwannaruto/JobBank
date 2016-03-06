@@ -53,12 +53,12 @@ class Vacancy
     private $imagepath;
 
     /**
-     * @var \DateTime
+     * @var string
      */
     private $applybeforedate;
 
     /**
-     * @var \DateTime
+     * @var string
      */
     private $creationdate;
 
@@ -68,7 +68,7 @@ class Vacancy
     private $organizationname;
 
     /**
-     * @var \Bundle\VacancyBundle\Entity\User
+     * @var \Bundle\UserBundle\Entity\User
      */
     private $postedbyuserid;
 
@@ -292,7 +292,7 @@ class Vacancy
     /**
      * Set applybeforedate
      *
-     * @param \DateTime $applybeforedate
+     * @param string $applybeforedate
      *
      * @return Vacancy
      */
@@ -330,11 +330,25 @@ class Vacancy
     /**
      * Get creationdate
      *
-     * @return \DateTime
+     * @return string
      */
     public function getCreationdate()
     {
         return $this->creationdate;
+    }
+
+    /**
+     * Set organizationname
+     *
+     * @param string $organizationname
+     *
+     * @return Vacancy
+     */
+    public function setOrganizationname($organizationname)
+    {
+        $this->organizationname = $organizationname;
+
+        return $this;
     }
 
     /**
@@ -350,11 +364,11 @@ class Vacancy
     /**
      * Set postedbyuserid
      *
-     * @param \Bundle\VacancyBundle\Entity\User $postedbyuserid
+     * @param \Bundle\UserBundle\Entity\User $postedbyuserid
      *
      * @return Vacancy
      */
-    public function setPostedbyuserid(\Bundle\VacancyBundle\Entity\User $postedbyuserid = null)
+    public function setPostedbyuserid(\Bundle\UserBundle\Entity\User $postedbyuserid = null)
     {
         $this->postedbyuserid = $postedbyuserid;
 
@@ -364,11 +378,25 @@ class Vacancy
     /**
      * Get postedbyuserid
      *
-     * @return \Bundle\VacancyBundle\Entity\User
+     * @return \Bundle\UserBundle\Entity\User
      */
     public function getPostedbyuserid()
     {
         return $this->postedbyuserid;
     }
-}
+    /**
+     * @var integer
+     */
+    private $id;
 
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+}

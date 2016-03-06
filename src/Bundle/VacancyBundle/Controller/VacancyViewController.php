@@ -2,6 +2,7 @@
 
 namespace Bundle\VacancyBundle\Controller;
 
+use Bundle\CoreBundle\Values\RouteName;
 use Bundle\CoreBundle\Values\TwigTemplate;
 
 class VacancyViewController extends BaseVacancyController {

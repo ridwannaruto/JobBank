@@ -4,9 +4,14 @@
     <indexes>
       <index name="fk_vacancy_user1_idx" columns="postedByUserID"/>
     </indexes>
-    <id name="organizationname" type="string" column="organizationName" length="200">
+    <id name="id" type="integer" column="id">
       <generator strategy="IDENTITY"/>
     </id>
+    <field name="organizationname" type="string" column="organizationName" length="200" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
     <field name="contactname" type="string" column="contactName" length="100" nullable="true">
       <options>
         <option name="fixed"/>
@@ -32,9 +37,10 @@
         <option name="fixed"/>
       </options>
     </field>
-    <field name="noofvacancies" type="integer" column="noOfVacancies" nullable="true">
+    <field name="noofvacancies" type="integer" column="noOfVacancies" nullable="false">
       <options>
         <option name="unsigned"/>
+        <option name="default">1</option>
       </options>
     </field>
     <field name="heading" type="string" column="heading" length="50" nullable="false">
@@ -52,9 +58,9 @@
         <option name="fixed"/>
       </options>
     </field>
-    <field name="applybeforedate" type="datetime" column="applyBeforeDate" nullable="false"/>
-    <field name="creationdate" type="datetime" column="creationDate" nullable="false"/>
-    <many-to-one field="postedbyuserid" target-entity="User" fetch="LAZY">
+    <field name="applybeforedate" type="text" column="applyBeforeDate" nullable="false"/>
+    <field name="creationdate" type="text" column="creationDate" nullable="false"/>
+    <many-to-one field="postedbyuserid" target-entity="Bundle\UserBundle\Entity\User" fetch="LAZY">
       <join-columns>
         <join-column name="postedByUserID" referenced-column-name="id"/>
       </join-columns>

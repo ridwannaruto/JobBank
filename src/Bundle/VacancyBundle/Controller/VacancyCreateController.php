@@ -3,9 +3,11 @@
 namespace Bundle\VacancyBundle\Controller;
 
 
+use Bundle\CoreBundle\Values\RouteName;
 use Bundle\CoreBundle\Values\TwigTemplate;
 use Bundle\VacancyBundle\Entity\Vacancy;
 use Bundle\VacancyBundle\Form\VacancyType;
+use Bundle\VacancyBundle\Messages\VacancyMessage;
 use Symfony\Component\HttpFoundation\Request;
 
 class VacancyCreateController extends BaseVacancyController
@@ -27,6 +29,9 @@ class VacancyCreateController extends BaseVacancyController
                 if ($newVacancyForm->isValid()) {
                     $newVacancy = $newVacancyForm->getData();
 
+                    $newVacancy->setCreationDate(date('Y/m/d H:m:s'));
+                    $newVacancy->setPostedbyuserid($loggedUser);
+
                     try {
                         $this->saveEntityInstantly($newVacancy);
                     } catch (\Exception $e) {
@@ -40,7 +45,7 @@ class VacancyCreateController extends BaseVacancyController
 
                     return $this->redirect($this->generateUrl(RouteName::$ROUTE_VACANCY_LIST, array(
                             'type' => 'S',
-                            'message' => ProjectMessage::$MESSAGE_VACANCY_CREATE_SUCCESS
+                            'message' => VacancyMessage::$MESSAGE_VACANCY_CREATE_SUCCESS
                         )
                     ));
                 }

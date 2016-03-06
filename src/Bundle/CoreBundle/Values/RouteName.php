@@ -26,7 +26,6 @@ class RouteName  {
     public static $ROUTE_USER_PROFILE = 'user_profile';
     public static $ROUTE_USER_RESET_PASSWORD = 'reset_password';
 
-
-
-
+    public static $ROUTE_VACANCY_LIST = 'vacancy_index';
+    public static $ROUTE_VACANCY_NEW = 'vacancy_new';
 }
