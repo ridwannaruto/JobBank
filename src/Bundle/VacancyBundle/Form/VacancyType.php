@@ -24,6 +24,9 @@ class VacancyType extends AbstractType {
                         'data' => \Date('today'),
                     )
                 ))
+                ->add('submit', 'submit', array(
+                    'label' => 'Create Vacancy'
+                ))
 
         ;
     }

@@ -2,7 +2,7 @@
 
 namespace Bundle\ProjectBundle\Controller;
 
-use Bundle\CoreBundle\Controller\GenericMessage;
+use Bundle\CoreBundle\Messages\GenericMessage;
 use Bundle\ProjectBundle\Messages\ProjectMessage;
 use Bundle\CoreBundle\Values\RepositoryName;
 use Bundle\CoreBundle\Values\RouteName;
@@ -47,7 +47,7 @@ class ProjectCreateController extends BaseProjectController {
                         return $this->render(TwigTemplate::$TWIG_PROJECT_NEW, array(
                                     'message' => GenericMessage::$MESSAGE_ERROR_GENERAL,
                                     'type' => 'E',
-                                    'Notifications' => $notificationList,
+                                    'notificationList' => $notificationList,
                                     'form' => $newProjectForm->createView()
                         ));
                     }

@@ -62,25 +62,14 @@
                     {{form_widget(form.due,{'value':"now"|date("m/d/Y")})}}
                 <span class="help-inline">{{ form_errors(form.due) }}</span>
             </div>
-        </div>        
-                    
-       
+        </div>
         
         <div class="control-group primary">
-                    {{form_label(form.due, ' ',{ 'label_attr': {'class': 'control-label'} })}}
-
             <div class="controls">
                     {{form_widget(form.submit,{'attr':{'class':'btn btn-success span3'}})}}
-       
             </div>
         </div>
         {{ form_end(form) }}
-        
-
-        
-
-
     </div>
-
 </div>
 {% endblock %}

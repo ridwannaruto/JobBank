@@ -25,6 +25,12 @@
                         <span class="help-inline">{{ form_errors(form.applybeforedate) }}</span>
                     </div>
                 </div>
+
+                <div class="control-group primary">
+                    <div class="controls">
+                        {{form_widget(form.submit,{'attr':{'class':'btn btn-success span3'}})}}
+                    </div>
+                </div>
             {{ form_end(form) }}
         </div>
     </div>
