@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Bundle\VacancyBundle\Entity\Vacancy" table="vacancy">
+    <indexes>
+      <index name="fk_vacancy_user1_idx" columns="postedByUserID"/>
+    </indexes>
+    <id name="organizationname" type="string" column="organizationName" length="200">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="contactname" type="string" column="contactName" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="contactdesignation" type="string" column="contactDesignation" length="50" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="contactemail" type="string" column="contactEmail" length="30" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="contactnumber" type="string" column="contactNumber" length="15" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="availableposition" type="string" column="availablePosition" length="15" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="noofvacancies" type="integer" column="noOfVacancies" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="heading" type="string" column="heading" length="50" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="description" type="string" column="description" length="500" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="imagepath" type="text" column="imagePath" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="applybeforedate" type="datetime" column="applyBeforeDate" nullable="false"/>
+    <field name="creationdate" type="datetime" column="creationDate" nullable="false"/>
+    <many-to-one field="postedbyuserid" target-entity="User" fetch="LAZY">
+      <join-columns>
+        <join-column name="postedByUserID" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

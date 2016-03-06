@@ -1,0 +1,18 @@
+{%  extends "CoreBundle:Base:base.html.twig" %}
+
+{% block content %}
+    <div id="content" class="span10">
+        {% if app.session.get('access_level') == 'Admin'%}
+            <div class="row-fluid">
+                <div class="pull-right">
+                    <a href="{{path('vacancy_new')}}"><button class="btn btn-round btn-success"><i class="icon-plus"></i> New Vacancy </button></a>
+                </div>
+            </div>
+            <br>
+        {% endif %}
+
+        {# Vacancy list view content goes here #}
+
+
+    </div>
+{% endblock %}

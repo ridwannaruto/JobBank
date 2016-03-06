@@ -1,3 +1,7 @@
-bundle_vacancy_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: BundleVacancyBundle:Default:index }
+vacancy_index:
+    pattern:  /vacancy/index
+    defaults: { _controller: VacancyBundle:VacancyView:view }
+
+vacancy_new:
+    pattern:  /vacancy/new
+    defaults: { _controller: VacancyBundle:VacancyCreate:newVacancy}

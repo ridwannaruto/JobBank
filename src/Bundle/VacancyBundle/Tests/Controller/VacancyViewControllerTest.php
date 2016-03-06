@@ -4,7 +4,7 @@ namespace Bundle\VacancyBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class DefaultControllerTest extends WebTestCase
+class VacancyViewControllerTest extends WebTestCase
 {
     public function testIndex()
     {

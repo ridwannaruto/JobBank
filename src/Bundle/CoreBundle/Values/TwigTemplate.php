@@ -43,6 +43,10 @@ namespace Bundle\CoreBundle\Values;
      public static $TWIG_USER_RESET_PASSWORD = 'UserBundle:Account:resetPassword.html.twig';
      public static $TWIG_USER_FORGOT_PASSWORD = 'UserBundle:Account:forgotPassword.html.twig';
 
+     //VacancyBundle Twig Templates
+     public static $TWIG_VACANCY_LIST = 'VacancyBundle:Vacancy:list.html.twig';
+     public static $TWIG_VACANCY_NEW = 'VacancyBundle:Vacancy:new.html.twig';
+
 
 
      //Email TWig Templates

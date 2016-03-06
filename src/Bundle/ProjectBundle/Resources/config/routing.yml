@@ -24,6 +24,3 @@ project_complete:
     pattern:  /project/complete/{projectId}
     defaults: { _controller: ProjectBundle:ProjectUpdate:complete }
     methods: POST
-    
-
-    

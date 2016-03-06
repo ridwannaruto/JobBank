@@ -32,5 +32,5 @@ bundle_entity:
     prefix:   /
 
 bundle_vacancy:
-    resource: "@BundleVacancyBundle/Resources/config/routing.yml"
+    resource: "@VacancyBundle/Resources/config/routing.yml"
     prefix:   /
