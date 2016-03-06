@@ -25,11 +25,11 @@ class ProjectListController extends BaseController {
             $completedProjectList = $this->getCompletedProjectList();
             $ongoingProjectList = $this->getOngoingProjectList();
             return $this->render(TwigTemplate::$TWIG_PROJECT_LIST, array(
-                        'completedProjectList' => $completedProjectList,
-                        'ongoingProjectList' => $ongoingProjectList,
-                        'message' => $request->get('message'),
-                        'type' => $request->get('type'),
-                        'notificationList' => $notificationList
+                'completedProjectList' => $completedProjectList,
+                'ongoingProjectList' => $ongoingProjectList,
+                'message' => $request->get('message'),
+                'type' => $request->get('type'),
+                $this->KEY_NOTIFICATION_LIST => $notificationList
             ));
         }
         return $this->redirect($this->generateUrl(RouteName::$ROUTE_LOGIN));

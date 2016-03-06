@@ -45,6 +45,7 @@ namespace Bundle\CoreBundle\Values;
 
      //VacancyBundle Twig Templates
      public static $TWIG_VACANCY_LIST = 'VacancyBundle:Vacancy:list.html.twig';
+     public static $TWIG_VACANCY_DETAIL = 'VacancyBundle:Vacancy:details.html.twig';
      public static $TWIG_VACANCY_NEW = 'VacancyBundle:Vacancy:new.html.twig';
 
 

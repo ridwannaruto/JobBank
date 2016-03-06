@@ -1,5 +1,9 @@
 vacancy_index:
     pattern:  /vacancy/index
+    defaults: { _controller: VacancyBundle:VacancyList:viewList }
+
+vacancy_detail:
+    pattern:  /vacancy/view/{vacancyId}
     defaults: { _controller: VacancyBundle:VacancyView:view }
 
 vacancy_new:

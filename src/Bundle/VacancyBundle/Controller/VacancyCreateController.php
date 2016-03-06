@@ -17,7 +17,7 @@ class VacancyCreateController extends BaseVacancyController
         if ($loggedUser) {
             $accessLevel = $loggedUser->getAccesslevel();
             $notificationList = $this->getNotificationList($loggedUser->getId());
-            if ($accessLevel == $this->USER_ROLE_ADMIN || $accessLevel == $this->USER_ROLE_HEAD) {
+            if ($accessLevel == $this->USER_ROLE_ADMIN) {
                 $newVacancy = new Vacancy();
                 $newVacancyForm = $this->createForm(new VacancyType(), $newVacancy, array(
                     'attr' => array(
