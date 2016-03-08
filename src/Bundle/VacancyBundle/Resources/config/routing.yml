@@ -14,6 +14,10 @@ vacancy_edit:
     pattern:  /vacancy/edit/{vacancyId}
     defaults: { _controller: VacancyBundle:VacancyUpdate:editVacancy }
 
+vacancy_edit_image:
+    pattern:  /vacancy/editImage/{vacancyId}
+    defaults: { _controller: VacancyBundle:VacancyUpdate:editVacancyImage }
+
 vacancy_delete:
     pattern:  /vacancy/delete/{vacancyId}
     defaults: { _controller: VacancyBundle:VacancyDelete:deleteVacancy }

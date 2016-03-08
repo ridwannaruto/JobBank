@@ -388,11 +388,23 @@ class Vacancy
     {
         return $this->postedbyuserid;
     }
+
     /**
      * @var integer
      */
     private $id;
 
+    /**
+     * Set postedbyuserid
+     *
+     * @param integer $id
+     *
+     * @return Vacancy
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
 
     /**
      * Get id

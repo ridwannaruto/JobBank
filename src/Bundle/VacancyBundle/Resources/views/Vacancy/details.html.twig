@@ -11,9 +11,10 @@
                         {% if app.session.get('user_id') == vacancy.postedbyuserid.id %}
                             <div class="pull-right">
                                 {% if date(vacancy.applybeforedate) > date('today') %}
-                                    <a href=" {{ path('vacancy_edit', { 'vacancyId': vacancy.id }) }}"><button  class="btn btn-small btn-inverse">edit</button></a>
+                                    <a href=" {{ path('vacancy_edit', { 'vacancyId': vacancy.id }) }}"><button  class="btn btn-small btn-inverse">Edit</button></a>
+                                    <a href=" {{ path('vacancy_edit_image', { 'vacancyId': vacancy.id }) }}"><button  class="btn btn-small btn-inverse">Edit Image</button></a>
                                 {% endif %}
-                                <button class="btn btn-small btn-danger btn-delete" url="{{ path('vacancy_delete', { 'vacancyId': vacancy.id }) }}" id="{{ vacancy.id }}" >delete</button>
+                                <button class="btn btn-small btn-danger btn-delete" url="{{ path('vacancy_delete', { 'vacancyId': vacancy.id }) }}" id="{{ vacancy.id }}" >Delete</button>
                                 <br>
                             </div>
                         {% endif %}
