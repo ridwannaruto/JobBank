@@ -4,16 +4,16 @@ vacancy_index:
 
 vacancy_detail:
     pattern:  /vacancy/view/{vacancyId}
-    defaults: { _controller: VacancyBundle:VacancyView:view }
+    defaults: { _controller: VacancyBundle:VacancyView:viewVacancy }
 
 vacancy_new:
     pattern:  /vacancy/new
-    defaults: { _controller: VacancyBundle:VacancyCreate:newVacancy}
+    defaults: { _controller: VacancyBundle:VacancyCreate:newVacancy }
 
 vacancy_edit:
     pattern:  /vacancy/edit/{vacancyId}
-    defaults: { _controller: VacancyBundle:VacancyUpdate:editProject}
+    defaults: { _controller: VacancyBundle:VacancyUpdate:editVacancy }
 
 vacancy_delete:
     pattern:  /vacancy/delete/{vacancyId}
-    defaults: { _controller: VacancyBundle:}
+    defaults: { _controller: VacancyBundle:VacancyDelete:deleteVacancy }

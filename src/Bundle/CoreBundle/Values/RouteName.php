@@ -28,4 +28,5 @@ class RouteName  {
 
     public static $ROUTE_VACANCY_LIST = 'vacancy_index';
     public static $ROUTE_VACANCY_NEW = 'vacancy_new';
+    public static $ROUTE_VACANCY_DETAIL = 'vacancy_detail';
 }

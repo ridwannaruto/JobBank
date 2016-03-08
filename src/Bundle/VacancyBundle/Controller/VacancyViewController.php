@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class VacancyViewController extends BaseVacancyController {
 
-    public function viewAction($vacancyId, Request $request) {
+    public function viewVacancyAction($vacancyId, Request $request) {
         $authenticatedUser = $this->authenticateUser();
         if ($authenticatedUser) {
             $accessLevel = $authenticatedUser->getAccesslevel();

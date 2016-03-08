@@ -2,5 +2,108 @@
 
 
 {% block content %}
-    Vacancy Edit Test
+    <div id="content" class="span10">
+        <div class="row-fluid">
+            <h2><i class="icon-locked"></i> Create New Vacancy</h2>
+            <hr>
+
+            {{ form_start(form) }}
+            <div class="control-group primary">
+                {{ form_label(form.heading, 'Title',{ 'label_attr': {'class': 'control-label'} } ) }}
+
+                <div class="controls">
+                    {{ form_widget(form.heading) }}
+                    <span class="help-inline">{{ form_errors(form.heading) }}</span>
+                </div>
+            </div>
+
+            <div class="control-group primary">
+                {{ form_label(form.description, 'Description',{ 'label_attr': {'class': 'control-label'} } ) }}
+
+                <div class="controls">
+                    {{ form_widget(form.description) }}
+                    <span class="help-inline">{{ form_errors(form.description) }}</span>
+                </div>
+            </div>
+
+            <div class="control-group primary">
+                {{ form_label(form.organizationname, 'Name of the Organization',{ 'label_attr': {'class': 'control-label'} } ) }}
+
+                <div class="controls">
+                    {{ form_widget(form.organizationname) }}
+                    <span class="help-inline">{{ form_errors(form.organizationname) }}</span>
+                </div>
+            </div>
+
+            <div class="control-group primary">
+                {{ form_label(form.availableposition, 'Available Position',{ 'label_attr': {'class': 'control-label'} } ) }}
+
+                <div class="controls">
+                    {{ form_widget(form.availableposition) }}
+                    <span class="help-inline">{{ form_errors(form.availableposition) }}</span>
+                </div>
+            </div>
+
+            <div class="control-group primary">
+                {{ form_label(form.noofvacancies, 'No of Vacancies',{ 'label_attr': {'class': 'control-label'} } )}}
+
+                <div class="controls">
+                    {{ form_widget(form.noofvacancies) }}
+                    <span class="help-inline">{{ form_errors(form.noofvacancies) }}</span>
+                </div>
+            </div>
+
+            <div class="control-group primary">
+                {{ form_label(form.contactname, 'Contact\'s Name',{ 'label_attr': {'class': 'control-label'} } )}}
+
+                <div class="controls">
+                    {{ form_widget(form.contactname) }}
+                    <span class="help-inline">{{ form_errors(form.contactname) }}</span>
+                </div>
+            </div>
+
+            <div class="control-group primary">
+                {{ form_label(form.contactdesignation, 'Contact\'s Designation',{ 'label_attr': {'class': 'control-label'} } )}}
+
+                <div class="controls">
+                    {{ form_widget(form.contactdesignation) }}
+                    <span class="help-inline">{{ form_errors(form.contactdesignation) }}</span>
+                </div>
+            </div>
+
+            <div class="control-group primary">
+                {{ form_label(form.contactemail, 'Contact Email',{ 'label_attr': {'class': 'control-label'} } )}}
+
+                <div class="controls">
+                    {{ form_widget(form.contactemail) }}
+                    <span class="help-inline">{{ form_errors(form.contactemail) }}</span>
+                </div>
+            </div>
+
+            <div class="control-group primary">
+                {{ form_label(form.contactnumber, 'Contact Number',{ 'label_attr': {'class': 'control-label'} } )}}
+
+                <div class="controls">
+                    {{ form_widget(form.contactnumber) }}
+                    <span class="help-inline">{{ form_errors(form.contactnumber) }}</span>
+                </div>
+            </div>
+
+            <div class="control-group primary">
+                {{ form_label(form.applybeforedate, 'Deadline for Applications',{ 'label_attr': {'class': 'control-label'} } ) }}
+
+                <div class="controls">
+                    {{ form_widget(form.applybeforedate, { 'value':"now"|date("m/d/Y") } ) }}
+                    <span class="help-inline">{{ form_errors(form.applybeforedate) }}</span>
+                </div>
+            </div>
+
+            <div class="control-group primary">
+                <div class="controls">
+                    {{ form_widget(form.submit, { 'attr':{ 'class':'btn btn-success span3' }, 'label':'Update Details' } ) }}
+                </div>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
 {% endblock %}
