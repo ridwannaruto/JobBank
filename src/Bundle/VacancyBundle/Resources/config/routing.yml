@@ -9,3 +9,11 @@ vacancy_detail:
 vacancy_new:
     pattern:  /vacancy/new
     defaults: { _controller: VacancyBundle:VacancyCreate:newVacancy}
+
+vacancy_edit:
+    pattern:  /vacancy/edit/{vacancyId}
+    defaults: { _controller: VacancyBundle:VacancyUpdate:editProject}
+
+vacancy_delete:
+    pattern:  /vacancy/delete/{vacancyId}
+    defaults: { _controller: VacancyBundle:}

@@ -10,7 +10,7 @@
 
                 <div id="content" class="span12">
                     <h2>Project Details</h2>
-                    <hr>
+                    <br>
                      {% if app.session.get('user_id') == Project.manager%}
                     <div class="pull-right">
                         {% if Project.status == 0 %}
